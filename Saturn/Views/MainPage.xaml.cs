@@ -6,9 +6,9 @@ public partial class MainPage : ContentPage
 	{
 		InitializeComponent();
 
-		GenerateUIAsync();
+        GenerateUIAsync();
 
-		this.BindingContext = _viewModel = new MainViewModel();
+        this.BindingContext = _viewModel = new MainViewModel();
 	}
 
 	MainViewModel _viewModel;
@@ -22,46 +22,38 @@ public partial class MainPage : ContentPage
             #region skeleton
             contentGrid.Add(new StackLayout
             {
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                VerticalOptions = LayoutOptions.Center,
+                Orientation = StackOrientation.Horizontal,
                 Children =
                 {
-                    new StackLayout
+                    new Border
                     {
+                        Stroke = Colors.Transparent,
+                        Background = Color.FromArgb("#E1E1E1"),
                         HorizontalOptions = LayoutOptions.FillAndExpand,
                         VerticalOptions = LayoutOptions.Center,
-                        Orientation = StackOrientation.Horizontal,
 
-                        Children =
+
+                        StrokeShape = new RoundRectangle
                         {
-                            new Border
-                            {
-                                Stroke = Colors.Transparent,
-                                Background = Color.FromArgb("#C8C8C8"),
-                                HorizontalOptions = LayoutOptions.FillAndExpand,
-                                VerticalOptions = LayoutOptions.CenterAndExpand,
+                            CornerRadius = new CornerRadius(6, 6, 6, 6)
+                        },
+                        HeightRequest = 30
+                    }.Margins(10, 0, 10, 0),
 
-                                StrokeShape = new RoundRectangle
-                                {
-                                    CornerRadius = new CornerRadius(6, 6, 6, 6)
-                                },
-                                HeightRequest = 25
-                            }.Margins(0, 0, 10, 0),
+                    new Border
+                    {
+                        Stroke = Colors.Transparent,
+                        StrokeShape = new RoundRectangle
+                        {
+                            CornerRadius = new CornerRadius(6, 6, 6, 6)
+                        },
+                        Background = Color.FromArgb("#E1E1E1"),
+                        VerticalOptions = LayoutOptions.Center,
+                        HorizontalOptions = LayoutOptions.EndAndExpand
+                    }.Height(30).Width(30).Margins(0, 0, 10, 0),
 
-                            new Border
-                            {
-                                Stroke = Colors.Transparent,
-                                StrokeShape = new RoundRectangle
-                                {
-                                    CornerRadius = new CornerRadius(6, 6, 6, 6)
-                                },
-                                Background = Color.FromArgb("#C8C8C8"),
-                                VerticalOptions = LayoutOptions.CenterAndExpand,
-                                HorizontalOptions = LayoutOptions.EndAndExpand
-                            }.Height(25).Width(25).Margins(0, 0, 10, 0),
-
-                        }
-                    }.Height(40).Margins(10, 0, 0, 0),
-
-                    
                 }
             }.Bind(StackLayout.IsVisibleProperty, static (MainViewModel vm) => vm.IsBusy), 0, 0);
 
@@ -101,8 +93,19 @@ public partial class MainPage : ContentPage
 
             contentGrid.Add(new Border
             {
-
-            }, 0, 1);
+                Stroke = Colors.Transparent,
+                StrokeShape = new RoundRectangle
+                {
+                    CornerRadius = new CornerRadius(6, 6, 6, 6)
+                },
+                Background = Color.FromArgb("#E1E1E1"),
+                VerticalOptions = LayoutOptions.CenterAndExpand,
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                Content = new BorderlessEntry
+                {
+                    Placeholder = "Нажмите для поиска"
+                }.Margins(15, 0, 0, 0)
+            }.Margins(10, 0, 10, 0), 0, 1);
 
         #endregion
 
