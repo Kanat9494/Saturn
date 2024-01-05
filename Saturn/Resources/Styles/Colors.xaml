@@ -42,4 +42,29 @@
     <SolidColorBrush x:Key="Gray600Brush" Color="{StaticResource Gray600}"/>
     <SolidColorBrush x:Key="Gray900Brush" Color="{StaticResource Gray900}"/>
     <SolidColorBrush x:Key="Gray950Brush" Color="{StaticResource Gray950}"/>
+
+    <!--Custom colors-->
+    <Color x:Key="Green45">#00e600</Color>
+    <Color x:Key="White95">#f2f2f2</Color>
+    <Color x:Key="White60">#999999</Color>
+    <Color x:Key="RedOrange60">#ff5c33</Color>
+    <Color x:Key="Red50">#ff0000</Color>
+    <Color x:Key="Green60">#66ff33</Color>
+    <Color x:Key="Orange60">#ffad33</Color>
+    <Color x:Key="Yellow60">#ffd633</Color>
+    <Color x:Key="Pink65">#ff4dff</Color>
+    <Color x:Key="PinkPrimary">#F5E1E9</Color>
+    <Color x:Key="GreenPrimary">#b3ffb3</Color>
+    <Color x:Key="Yellow65">#ffff4d</Color>
+    <Color x:Key="Green50">#33cc33</Color>
+    <Color x:Key="Pink85">#ffb3ff</Color>
+    <Color x:Key="Red70">#ff6666</Color>
+    <Color x:Key="Green55">#1aff1a</Color>
+    <Color x:Key="Green40">#00cc00</Color>
+    <Color x:Key="Red60">#ff3333</Color>
+    <Color x:Key="Pink80">#ff99e6</Color>
+    <Color x:Key="DarkPink50">#bf4080</Color>
+    <Color x:Key="Pink100">#AB119D</Color>
+    <Color x:Key="Red100">#ff471a</Color>
+    <Color x:Key="Green35">#00b300</Color>
 </ResourceDictionary>

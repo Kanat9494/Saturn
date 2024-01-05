@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Saturn.Views.MainPage"
+             xmlns:models="clr-namespace:Saturn.Models"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Title="MainPage">
+    <ContentPage.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="{x:StaticResource Green35}"/>
+    </ContentPage.Behaviors>
+
+    
+    <!--<CollectionView ItemsSource="{Binding Products}">
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="models:Product">
+                <Grid HeightRequest="170" Margin="10, 5, 10, 5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20*"/>
+                        <RowDefinition Height="20*"/>
+                        <RowDefinition Height="20*"/>
+                        <RowDefinition Height="20*"/>
+
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40*"/>
+                        <ColumnDefinition Width="60*"/>
+
+                    </Grid.ColumnDefinitions>
+
+                    <Image Grid.RowSpan="4" Grid.Column="0" Source="{Binding ImageUrl}"/>
+                    <Label Text="{Binding ProductId}" Grid.Column="1" Grid.Row="0"/>
+                    <Label Text="{Binding ProductName}" Grid.Column="1" Grid.Row="1"/>
+
+                    <Label Text="{Binding CategoryId}" Grid.Column="1" Grid.Row="2"/>
+                    <Label Text="{Binding Price}" Grid.Column="1" Grid.Row="3"/>
+
+                </Grid>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>-->
+
+    <RefreshView>
+        <Grid Margin="15, 5" VerticalOptions="FillAndExpand" x:Name="contentGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="50"/>
+                <!--<RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>-->
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+        </Grid>
+    </RefreshView>
+</ContentPage>

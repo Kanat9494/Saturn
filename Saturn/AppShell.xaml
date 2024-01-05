@@ -3,13 +3,31 @@
     x:Class="Saturn.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:Saturn"
+    xmlns:views="clr-namespace:Saturn.Views"
     Shell.FlyoutBehavior="Disabled"
     Title="Saturn">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+        <ShellContent
+            Title="Главная"
+            ContentTemplate="{DataTemplate views:MainPage}"
+            Route="MainPage" 
+            Shell.NavBarIsVisible="False"
+            Icon="home_icon.png"/>
+
+        <ShellContent
+            Title="Корзина"
+            ContentTemplate="{DataTemplate views:MainPage}"
+            Route="ShoppingCartPage" 
+            Shell.NavBarIsVisible="True"
+            Icon="shopping_cart_icon.png"/>
+
+        <ShellContent
+            Title="Аккаунт"
+            ContentTemplate="{DataTemplate views:MainPage}"
+            Route="AccountPage" 
+            Shell.NavBarIsVisible="False"
+            Icon="account_icon.png"/>
+    </TabBar>
 
 </Shell>
