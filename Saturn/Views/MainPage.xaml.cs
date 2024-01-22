@@ -121,22 +121,22 @@ public partial class MainPage : ContentPage
                 }.Margins(15, 0, 0, 0)
             }.Margins(10, 0, 10, 0), 0, 1);
 
-            var button = new Button
-            {
-                Text = "Test",
-            };
-            button.Clicked += (sender, e) => _viewModel.LaunchApp();
-            contentGrid.Add(new StackLayout
-            {
-                Children = 
-                {
-                    button,
-                    //new Label
-                    //{
-                    //    Text = AppInfo.Current.VersionString
-                    //}
-                }
-            }, 0, 2);
+            //var button = new Button
+            //{
+            //    Text = "Test",
+            //};
+            //button.Clicked += (sender, e) => _viewModel.LaunchApp();
+            //contentGrid.Add(new StackLayout
+            //{
+            //    Children = 
+            //    {
+            //        button,
+            //        new Label
+            //        {
+            //            Text = AppInfo.Current.VersionString
+            //        }
+            //    }
+            //}, 0, 2);
 
         #endregion
 
