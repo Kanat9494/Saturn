@@ -57,7 +57,21 @@ public partial class MainPage : ContentPage
                 }
             }.Bind(StackLayout.IsVisibleProperty, static (MainViewModel vm) => vm.IsBusy), 0, 0);
 
-            
+            contentGrid.Add(new StackLayout
+            {
+                Children =
+                {
+                    ListViewSkeleton(),
+                    ListViewSkeleton(),
+                    ListViewSkeleton(),
+                }
+            }.Margins(10, 0, 10, 0).Bind(StackLayout.IsVisibleProperty, static (MainViewModel vm) => vm.IsBusy), 0, 2);
+            //ListViewSkeleton();
+            //ListViewSkeleton();
+            //ListViewSkeleton();
+            //ListViewSkeleton();
+
+
             #endregion
 
             //await _viewModel.Generate
@@ -106,6 +120,13 @@ public partial class MainPage : ContentPage
                     Placeholder = "Нажмите для поиска"
                 }.Margins(15, 0, 0, 0)
             }.Margins(10, 0, 10, 0), 0, 1);
+
+            var button = new Button
+            {
+                Text = "Test",
+            };
+            button.Clicked += (sender, e) => _viewModel.LaunchApp();
+            contentGrid.Add(button, 0, 2);
 
         #endregion
 

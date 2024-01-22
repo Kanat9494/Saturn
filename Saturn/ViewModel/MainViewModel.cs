@@ -32,4 +32,17 @@ internal class MainViewModel : BaseViewModel
             });
         }
     }
+
+    internal async void LaunchApp()
+    {
+        try
+        {
+            OpenOtherApp openOtherApp = new OpenOtherApp();
+            openOtherApp.LaunchApp("com.maanavan.mb_kyrgyzstan");
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlert("Ошибка", ex.Message, "Ок");
+        }
+    }
 }
