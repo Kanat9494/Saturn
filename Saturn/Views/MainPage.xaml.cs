@@ -6,7 +6,7 @@ public partial class MainPage : ContentPage
 	{
 		InitializeComponent();
 
-        GenerateUIAsync();
+        //GenerateUIAsync();
 
         this.BindingContext = _viewModel = new MainViewModel();
 	}

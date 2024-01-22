@@ -46,6 +46,7 @@
     <!--Custom colors-->
     <Color x:Key="Green45">#00e600</Color>
     <Color x:Key="White95">#f2f2f2</Color>
+    <Color x:Key="White78">#C8C8C8</Color>
     <Color x:Key="White60">#999999</Color>
     <Color x:Key="RedOrange60">#ff5c33</Color>
     <Color x:Key="Red50">#ff0000</Color>

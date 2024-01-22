@@ -5,17 +5,25 @@ internal class MainViewModel : BaseViewModel
     public MainViewModel()
     {
         Products = new ObservableCollection<Product>();
+        IsBusy = true;
 
-        //Task.Run(async () =>
-        //{
-        //    await GenerateProducts();
-        //}).GetAwaiter().OnCompleted(() =>
-        //{
-        //    IsBusy = false;
-        //});
+        Task.Run(async () =>
+        {
+            await GenerateProducts();
+        }).GetAwaiter().OnCompleted(() =>
+        {
+            IsBusy = false;
+        });
     }
 
     public ObservableCollection<Product> Products { get; set; }
+
+    private bool _isContent;
+    public bool IsContent
+    {
+        get => _isContent;
+        set => SetProperty(ref _isContent, value);
+    }
 
     internal async Task GenerateProducts()
     {
@@ -25,12 +33,14 @@ internal class MainViewModel : BaseViewModel
             Products.Add(new Product
             {
                 ProductId = i,
-                ProductName = "asdfl asdlfk",
+                ProductName = "asdfl asdlfk Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's st",
                 ImageUrl = "https://picsum.photos/200/300",
                 CategoryId = 1,
                 Price = 500.0
             });
         }
+        IsBusy = false;
+        IsContent = true;
     }
 
     internal async void LaunchApp()

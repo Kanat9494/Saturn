@@ -5,6 +5,8 @@
              xmlns:models="clr-namespace:Saturn.Models"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:borderlessEntry="clr-namespace:Saturn.Views.CustomControls"
+             xmlns:common="clr-namespace:Saturn.Views.Common"
+             
              Title="MainPage"
              Shell.BackgroundColor="{x:StaticResource Green40}">
     <ContentPage.Behaviors>
@@ -43,7 +45,7 @@
     </CollectionView>-->
 
     <RefreshView>
-        <Grid Margin="15, 5" VerticalOptions="FillAndExpand" x:Name="contentGrid">
+        <Grid x:Name="contentGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>
                 <RowDefinition Height="50"/>
@@ -52,6 +54,77 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
+            <Grid IsVisible="{Binding IsBusy}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80*"/>
+                    <ColumnDefinition Width="20*"/>
+                    
+                </Grid.ColumnDefinitions>
+
+                <Border BackgroundColor="{x:StaticResource White78}" StrokeShape="RoundRectangle 10" Margin="10"/>
+                <Border BackgroundColor="{x:StaticResource White78}" StrokeShape="RoundRectangle 10" Margin="10" Grid.Column="1" WidthRequest="40" HeightRequest="40"/>
+
+            </Grid>
+
+            
+
+            <StackLayout Grid.Row="2" IsVisible="{Binding IsBusy}">
+                <common:ListViewSkelet/>
+                <common:ListViewSkelet/>
+
+                <common:ListViewSkelet/>
+                <common:ListViewSkelet/>
+
+            </StackLayout>
+    
+    
+            <!--Content-->
+            <Grid Grid.Row="0" VerticalOptions="Center" Margin="10, 0, 10, 0" IsVisible="{Binding IsContent}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80*"/>
+                    <ColumnDefinition Width="20*"/>
+
+                </Grid.ColumnDefinitions>
+
+                <Label Text="Saturn" FontSize="24" FontAttributes="Bold, Italic" Grid.Column="0"/>
+
+                <Image Source="bell_icon.png" Grid.Column="1" HeightRequest="30" WidthRequest="30" HorizontalOptions="End"/>
+            </Grid>
+
+            <Border Grid.Row="1" HeightRequest="50" BackgroundColor="{x:StaticResource White78}" Margin="10" Stroke="Transparent"
+                StrokeShape="RoundRectangle 10">
+                <borderlessEntry:BorderlessEntry Margin="10, 5, 0, 0" Placeholder="Поиск"/>
+            </Border>
+
+            <CollectionView ItemsSource="{Binding Products}" Grid.Row="2" >
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Product">
+                        <Grid HeightRequest="170" Margin="10, 5, 10, 5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20*"/>
+                                <RowDefinition Height="20*"/>
+                                <RowDefinition Height="20*"/>
+                                <RowDefinition Height="20*"/>
+
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40*"/>
+                                <ColumnDefinition Width="60*"/>
+
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.RowSpan="4" Grid.Column="0" Source="{Binding ImageUrl}" Aspect="AspectFill"/>
+                            <Label Text="{Binding ProductId}" Grid.Column="1" Grid.Row="0" Margin="10, 0, 0, 0"/>
+                            <Label Text="{Binding ProductName}" Grid.Column="1" Grid.Row="1" Margin="10, 0, 0, 0" LineBreakMode="TailTruncation"/>
+
+                            <Label Text="{Binding CategoryId}" Grid.Column="1" Grid.Row="2" Margin="10, 0, 0, 0"/>
+                            <Label Text="{Binding Price}" Grid.Column="1" Grid.Row="3" Margin="10, 0, 0, 0"/>
+
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </Grid>
     </RefreshView>
 </ContentPage>

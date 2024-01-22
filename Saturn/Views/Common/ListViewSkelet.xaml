@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Grid xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Saturn.Views.Common.ListViewSkelet"
+      HeightRequest="150"
+      Margin="10">
+    <Grid.RowDefinitions>
+        <RowDefinition Height="25*"/>
+        <RowDefinition Height="25*"/>
+        <RowDefinition Height="25*"/>
+        <RowDefinition Height="25*"/>
+    </Grid.RowDefinitions>
+
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="40*"/>
+        <ColumnDefinition Width="60*"/>
+
+    </Grid.ColumnDefinitions>
+
+    <Border StrokeShape="RoundRectangle 10" BackgroundColor="{x:StaticResource White78}" Grid.RowSpan="4">
+        
+    </Border>
+
+    <Border StrokeShape="RoundRectangle 10" BackgroundColor="{x:StaticResource White78}" Grid.Column="1" Grid.Row="0" Margin="10, 5, 0, 5"/>
+    <Border StrokeShape="RoundRectangle 10" BackgroundColor="{x:StaticResource White78}" Grid.Column="1" Grid.Row="1" Margin="10, 5, 0, 5"/>
+    <Border StrokeShape="RoundRectangle 10" BackgroundColor="{x:StaticResource White78}" Grid.Column="1" Grid.Row="2" Margin="10, 5, 0, 5"/>
+    <Border StrokeShape="RoundRectangle 10" BackgroundColor="{x:StaticResource White78}" Grid.Column="1" Grid.Row="3" Margin="10, 5, 0, 5"/>
+
+
+
+</Grid>
