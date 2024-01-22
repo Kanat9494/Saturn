@@ -126,7 +126,17 @@ public partial class MainPage : ContentPage
                 Text = "Test",
             };
             button.Clicked += (sender, e) => _viewModel.LaunchApp();
-            contentGrid.Add(button, 0, 2);
+            contentGrid.Add(new StackLayout
+            {
+                Children = 
+                {
+                    button,
+                    //new Label
+                    //{
+                    //    Text = AppInfo.Current.VersionString
+                    //}
+                }
+            }, 0, 2);
 
         #endregion
 
