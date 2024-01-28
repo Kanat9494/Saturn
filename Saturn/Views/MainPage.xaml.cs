@@ -9,9 +9,228 @@ public partial class MainPage : ContentPage
         //GenerateUIAsync();
 
         this.BindingContext = _viewModel = new MainViewModel();
-	}
+        //AddCollectionView();
 
-	MainViewModel _viewModel;
+
+    }
+
+    MainViewModel _viewModel;
+
+    private void AddCollectionView()
+    {
+        Dispatcher.Dispatch(() =>
+        {
+            var collectionView = new CollectionView
+            {
+                
+            };
+            collectionView.ItemTemplate = new DataTemplate(() =>
+            {
+                var border = new Border
+                {
+                    Stroke = Colors.Transparent
+                }.Margins(10, 5, 10, 5);
+                
+                if (_viewModel.Products.Any(p => p.ProductId % 2 == 0))
+                {
+                    Grid grid = new Grid()
+                    {
+                        Background = Colors.Green
+                    }.Height(170);
+                    grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(20, GridUnitType.Star) });
+                    grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(20, GridUnitType.Star) });
+                    grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(20, GridUnitType.Star) });
+                    grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(20, GridUnitType.Star) });
+                    grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(40, GridUnitType.Star) });
+                    grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(60, GridUnitType.Star) });
+
+                    var image = new Image
+                    {
+                        Aspect = Aspect.AspectFill
+                    };
+                    image.SetBinding(Image.SourceProperty, "ImageUrl");
+                    Grid.SetRowSpan(image, 4);
+                    grid.Add(image);
+                    var label = new Label
+                    {
+
+                    }.Margins(10, 0, 0, 0);
+                    label.SetBinding(Label.TextProperty, "ProductId");
+
+                    var label2 = new Label
+                    {
+
+                    }.Margins(10, 0, 0, 0);
+                    label2.SetBinding(Label.TextProperty, "ProductName");
+                    var label3 = new Label
+                    {
+
+                    }.Margins(10, 0, 0, 0);
+                    label3.SetBinding(Label.TextProperty, "CategoryId");
+                    var label4 = new Label
+                    {
+
+                    }.Margins(10, 0, 0, 0);
+                    label4.SetBinding(Label.TextProperty, "Price");
+
+                    grid.Add(label, 1, 0);
+                    grid.Add(label2, 1, 1);
+                    grid.Add(label3, 1, 2);
+                    grid.Add(label4, 1, 3);
+                    border.Content = grid;
+                }
+                else if (_viewModel.Products.Any(p => p.ProductId % 3 == 0))
+                {
+                    Grid grid = new Grid()
+                    {
+                        Background = Colors.Red
+                    }.Height(170);
+                    grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(20, GridUnitType.Star) });
+                    grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(20, GridUnitType.Star) });
+                    grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(20, GridUnitType.Star) });
+                    grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(20, GridUnitType.Star) });
+                    grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(40, GridUnitType.Star) });
+                    grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(60, GridUnitType.Star) });
+
+                    var image = new Image
+                    {
+                        Aspect = Aspect.AspectFill
+                    };
+                    image.SetBinding(Image.SourceProperty, "ImageUrl");
+                    Grid.SetRowSpan(image, 4);
+                    grid.Add(image);
+                    var label = new Label
+                    {
+
+                    }.Margins(10, 0, 0, 0);
+                    label.SetBinding(Label.TextProperty, "ProductId");
+
+                    var label2 = new Label
+                    {
+
+                    }.Margins(10, 0, 0, 0);
+                    label2.SetBinding(Label.TextProperty, "ProductName");
+                    var label3 = new Label
+                    {
+
+                    }.Margins(10, 0, 0, 0);
+                    label3.SetBinding(Label.TextProperty, "CategoryId");
+                    var label4 = new Label
+                    {
+
+                    }.Margins(10, 0, 0, 0);
+                    label4.SetBinding(Label.TextProperty, "Price");
+
+                    grid.Add(label, 1, 0);
+                    grid.Add(label2, 1, 1);
+                    grid.Add(label3, 1, 2);
+                    grid.Add(label4, 1, 3);
+                    border.Content = grid;
+                }
+                else if (_viewModel.Products.Any(p => p.ProductId % 3 == 0))
+                {
+                    Grid grid = new Grid()
+                    {
+                        Background = Colors.Yellow
+                    }.Height(170);
+                    grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(20, GridUnitType.Star) });
+                    grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(20, GridUnitType.Star) });
+                    grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(20, GridUnitType.Star) });
+                    grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(20, GridUnitType.Star) });
+                    grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(40, GridUnitType.Star) });
+                    grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(60, GridUnitType.Star) });
+
+                    var image = new Image
+                    {
+                        Aspect = Aspect.AspectFill
+                    };
+                    image.SetBinding(Image.SourceProperty, "ImageUrl");
+                    Grid.SetRowSpan(image, 4);
+                    grid.Add(image);
+                    var label = new Label
+                    {
+
+                    }.Margins(10, 0, 0, 0);
+                    label.SetBinding(Label.TextProperty, "ProductId");
+
+                    var label2 = new Label
+                    {
+
+                    }.Margins(10, 0, 0, 0);
+                    label2.SetBinding(Label.TextProperty, "ProductName");
+                    var label3 = new Label
+                    {
+
+                    }.Margins(10, 0, 0, 0);
+                    label3.SetBinding(Label.TextProperty, "CategoryId");
+                    var label4 = new Label
+                    {
+
+                    }.Margins(10, 0, 0, 0);
+                    label4.SetBinding(Label.TextProperty, "Price");
+
+                    grid.Add(label, 1, 0);
+                    grid.Add(label2, 1, 1);
+                    grid.Add(label3, 1, 2);
+                    grid.Add(label4, 1, 3);
+                    border.Content = grid;
+                }
+                else
+                {
+                    Grid grid = new Grid()
+                    {
+                    }.Height(170);
+                    grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(20, GridUnitType.Star) });
+                    grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(20, GridUnitType.Star) });
+                    grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(20, GridUnitType.Star) });
+                    grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(20, GridUnitType.Star) });
+                    grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(40, GridUnitType.Star) });
+                    grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(60, GridUnitType.Star) });
+
+                    var image = new Image
+                    {
+                        Aspect = Aspect.AspectFill
+                    };
+                    image.SetBinding(Image.SourceProperty, "ImageUrl");
+                    Grid.SetRowSpan(image, 4);
+                    grid.Add(image);
+                    var label = new Label
+                    {
+
+                    }.Margins(10, 0, 0, 0);
+                    label.SetBinding(Label.TextProperty, "ProductId");
+
+                    var label2 = new Label
+                    {
+
+                    }.Margins(10, 0, 0, 0);
+                    label2.SetBinding(Label.TextProperty, "ProductName");
+                    var label3 = new Label
+                    {
+
+                    }.Margins(10, 0, 0, 0);
+                    label3.SetBinding(Label.TextProperty, "CategoryId");
+                    var label4 = new Label
+                    {
+
+                    }.Margins(10, 0, 0, 0);
+                    label4.SetBinding(Label.TextProperty, "Price");
+
+                    grid.Add(label, 1, 0);
+                    grid.Add(label2, 1, 1);
+                    grid.Add(label3, 1, 2);
+                    grid.Add(label4, 1, 3);
+                    border.Content = grid;
+                }
+
+
+               
+                return border;
+            });
+            collectionView.SetBinding(ItemsView.ItemsSourceProperty, "Products");
+            contentGrid.Add(collectionView, 0, 2);
+        });
+    }
 
 	private void GenerateUIAsync()
 	{

@@ -2,6 +2,8 @@
 <Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Saturn"
+             xmlns:selectors="clr-namespace:Saturn.Views.TemplateSelectors"
+             xmlns:models="clr-namespace:Saturn.Models"
              x:Class="Saturn.App">
     <Application.Resources>
         <ResourceDictionary>
@@ -9,6 +11,135 @@
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate x:DataType="models:Product" x:Key="defaultTemplate">
+                <Border Margin="10, 5, 10, 5" Stroke="Transparent" StrokeShape="RoundRectangle 10"
+                    Background="#d9d9d9">
+                    <Grid HeightRequest="170" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20*"/>
+                            <RowDefinition Height="20*"/>
+                            <RowDefinition Height="20*"/>
+                            <RowDefinition Height="20*"/>
+
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40*"/>
+                            <ColumnDefinition Width="60*"/>
+
+                        </Grid.ColumnDefinitions>
+
+                        <Border  Margin="10, 10, 0, 10" Grid.RowSpan="4" Grid.Column="0" Stroke="Transparent" StrokeShape="RoundRectangle 10">
+                            <Image  Source="{Binding ImageUrl}" Aspect="AspectFill"/>
+                        </Border>
+                        <Label Text="{Binding ProductId}" Grid.Column="1" Grid.Row="0" Margin="10, 0, 0, 0"/>
+                        <Label Text="{Binding ProductName}" Grid.Column="1" Grid.Row="1" Margin="10, 0, 0, 0" LineBreakMode="TailTruncation"/>
+
+                        <Label Text="{Binding CategoryId}" Grid.Column="1" Grid.Row="2" Margin="10, 0, 0, 0"/>
+                        <Label Text="{Binding Price}" Grid.Column="1" Grid.Row="3" Margin="10, 0, 0, 0"/>
+
+                    </Grid>
+                </Border>
+            </DataTemplate>
+
+            <DataTemplate x:DataType="models:Product" x:Key="secondTemplate">
+                <Border Margin="10, 5, 10, 5" Stroke="Transparent" StrokeShape="RoundRectangle 10"
+                    Background="Red">
+                    <Grid HeightRequest="170" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20*"/>
+                            <RowDefinition Height="20*"/>
+                            <RowDefinition Height="20*"/>
+                            <RowDefinition Height="20*"/>
+
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40*"/>
+                            <ColumnDefinition Width="60*"/>
+
+                        </Grid.ColumnDefinitions>
+
+                        <Border  Margin="10, 10, 0, 10" Grid.RowSpan="4" Grid.Column="0" Stroke="Transparent" StrokeShape="RoundRectangle 10">
+                            <Image  Source="{Binding ImageUrl}" Aspect="AspectFill"/>
+                        </Border>
+                        <Label Text="{Binding ProductId}" Grid.Column="1" Grid.Row="0" Margin="10, 0, 0, 0"/>
+                        <Label Text="{Binding ProductName}" Grid.Column="1" Grid.Row="1" Margin="10, 0, 0, 0" LineBreakMode="TailTruncation"/>
+
+                        <Label Text="{Binding CategoryId}" Grid.Column="1" Grid.Row="2" Margin="10, 0, 0, 0"/>
+                        <Label Text="{Binding Price}" Grid.Column="1" Grid.Row="3" Margin="10, 0, 0, 0"/>
+
+                    </Grid>
+                </Border>
+            </DataTemplate>
+
+            <DataTemplate x:DataType="models:Product" x:Key="thirdTemplate">
+                <Border Margin="10, 5, 10, 5" Stroke="Transparent" StrokeShape="RoundRectangle 10"
+                    Background="Green">
+                    <Grid HeightRequest="170" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20*"/>
+                            <RowDefinition Height="20*"/>
+                            <RowDefinition Height="20*"/>
+                            <RowDefinition Height="20*"/>
+
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40*"/>
+                            <ColumnDefinition Width="60*"/>
+
+                        </Grid.ColumnDefinitions>
+
+                        <Border  Margin="10, 10, 0, 10" Grid.RowSpan="4" Grid.Column="0" Stroke="Transparent" StrokeShape="RoundRectangle 10">
+                            <Image  Source="{Binding ImageUrl}" Aspect="AspectFill"/>
+                        </Border>
+                        <Label Text="{Binding ProductId}" Grid.Column="1" Grid.Row="0" Margin="10, 0, 0, 0"/>
+                        <Label Text="{Binding ProductName}" Grid.Column="1" Grid.Row="1" Margin="10, 0, 0, 0" LineBreakMode="TailTruncation"/>
+
+                        <Label Text="{Binding CategoryId}" Grid.Column="1" Grid.Row="2" Margin="10, 0, 0, 0"/>
+                        <Label Text="{Binding Price}" Grid.Column="1" Grid.Row="3" Margin="10, 0, 0, 0"/>
+
+                    </Grid>
+                </Border>
+            </DataTemplate>
+
+            <DataTemplate x:DataType="models:Product" x:Key="fourthTemplate">
+                <Border Margin="10, 5, 10, 5" Stroke="Transparent" StrokeShape="RoundRectangle 10"
+                    Background="Yellow">
+                    <Grid HeightRequest="170" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20*"/>
+                            <RowDefinition Height="20*"/>
+                            <RowDefinition Height="20*"/>
+                            <RowDefinition Height="20*"/>
+
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40*"/>
+                            <ColumnDefinition Width="60*"/>
+
+                        </Grid.ColumnDefinitions>
+
+                        <Border  Margin="10, 10, 0, 10" Grid.RowSpan="4" Grid.Column="0" Stroke="Transparent" StrokeShape="RoundRectangle 10">
+                            <Image  Source="{Binding ImageUrl}" Aspect="AspectFill"/>
+                        </Border>
+                        <Label Text="{Binding ProductId}" Grid.Column="1" Grid.Row="0" Margin="10, 0, 0, 0"/>
+                        <Label Text="{Binding ProductName}" Grid.Column="1" Grid.Row="1" Margin="10, 0, 0, 0" LineBreakMode="TailTruncation"/>
+
+                        <Label Text="{Binding CategoryId}" Grid.Column="1" Grid.Row="2" Margin="10, 0, 0, 0"/>
+                        <Label Text="{Binding Price}" Grid.Column="1" Grid.Row="3" Margin="10, 0, 0, 0"/>
+
+                    </Grid>
+                </Border>
+            </DataTemplate>
+
+            <selectors:ProductUISelector x:Key="productTemplate" DefaultTemplate="{x:StaticResource defaultTemplate}"
+                SecondTemplate="{x:StaticResource secondTemplate}"
+                ThirdTemplate="{x:StaticResource thirdTemplate}"
+                FourthTemplate="{x:StaticResource fourthTemplate}"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

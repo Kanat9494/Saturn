@@ -96,8 +96,8 @@
                 <borderlessEntry:BorderlessEntry Margin="10, 5, 0, 0" Placeholder="Поиск"/>
             </Border>
 
-            <CollectionView ItemsSource="{Binding Products}" Grid.Row="2" >
-                <CollectionView.ItemTemplate>
+            <CollectionView ItemsSource="{Binding Products}" Grid.Row="2" ItemTemplate="{x:StaticResource productTemplate}">
+                <!--<CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Product">
                         <Grid HeightRequest="170" Margin="10, 5, 10, 5">
                             <Grid.RowDefinitions>
@@ -123,7 +123,7 @@
 
                         </Grid>
                     </DataTemplate>
-                </CollectionView.ItemTemplate>
+                </CollectionView.ItemTemplate>-->
             </CollectionView>
         </Grid>
     </RefreshView>
