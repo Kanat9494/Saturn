@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:Saturn.Views"
+    xmlns:chats="clr-namespace:Saturn.Views.Chat"
     Shell.FlyoutBehavior="Disabled"
     Title="Saturn">
 
@@ -14,6 +15,13 @@
             Route="MainPage" 
             Shell.NavBarIsVisible="False"
             Icon="home_icon.png"/>
+
+        <ShellContent
+            Title="Чаты"
+            ContentTemplate="{DataTemplate chats:ChatsPage}"
+            Route="ShoppingCartPage" 
+            Shell.NavBarIsVisible="True"
+            Icon="chats_icon.png"/>
 
         <ShellContent
             Title="Корзина"

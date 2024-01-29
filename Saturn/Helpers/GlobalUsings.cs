@@ -9,6 +9,24 @@ global using Microsoft.Maui.Controls.Shapes;
 global using Saturn.Views.CustomControls;
 global using Saturn.Services.PartialMethods;
 global using System.ComponentModel.DataAnnotations;
+global using SQLite;
+global using Saturn.Constants;
+global using Saturn.Services.Implementations;
+global using Saturn.ViewModel.Chat;
+global using Saturn.Views.Chat;
+global using System.Net.Sockets;
+global using System.Text;
+global using System.Diagnostics;
+global using Newtonsoft.Json;
+
+
+
+
+
+
+
+
+
 
 
 
