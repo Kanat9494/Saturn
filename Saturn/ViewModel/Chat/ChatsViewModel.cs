@@ -23,7 +23,13 @@ internal class ChatsViewModel : BaseViewModel
 
     private async Task InitializeChats()
     {
-        await _chatsService.GetItemsAsync();
+        var chats = await _chatsService.GetItemsAsync();
+
+        if (chats != null & chats.Count > 0)
+        {
+            for (int i = 0; i < chats.Count; i++)
+                Chats.Add(chats[i]);
+        }
     }
 
     void ConnectToRTCServer()
@@ -40,7 +46,7 @@ internal class ChatsViewModel : BaseViewModel
 
             var message = new
             {
-                SenderName = _userId,
+                SenderId = _userId,
                 ReceiverName = _receiverId,
                 Content = "Подключение"
             };
@@ -96,8 +102,8 @@ internal class ChatsViewModel : BaseViewModel
                 }
                 while (_stream.DataAvailable);
 
-                var c = builder.ToString();
-                Debug.WriteLine(c);
+                await HasUserChat(builder.ToString());
+                //Debug.WriteLine(c);
             }
             catch (Exception ex)
             {
@@ -114,5 +120,61 @@ internal class ChatsViewModel : BaseViewModel
             _tcpClient.Close();
 
         //Environment.Exit(0);
+    }
+
+    private async Task HasUserChat(string json)
+    {
+        try
+        {
+            ChatRoom chat;
+            var message = JsonConvert.DeserializeObject<Message>(json);
+            var chatId = await _chatsService.HasUserChat(message.SenderId);
+
+            if (chatId > 0)
+            {
+                chat = await _chatsService.GetItemAsync(chatId);
+                chat.Title = $"Aika + {message.SenderId}";
+                chat.SenderId = message.SenderId;
+                chat.LastMessage = message.Content;
+                chat.NotReadCount = 1;
+                chat.HasNotRead = true;
+                await _chatsService.SaveItemAsync(chat);
+                chatId = chat.ChatId;
+                if (!Chats.Any(c => c.ChatId == chatId))
+                    Chats.Add(chat);
+                else
+                {
+                    chat = Chats.FirstOrDefault(c => c.ChatId == chatId);
+                    int i = Chats.IndexOf(chat);
+                    Chats[i].LastMessage = message.Content;
+                }
+            }
+            else
+            {
+                chat = new ChatRoom
+                {
+                    Title = $"Aika {message.SenderId}",
+                    SenderId = message.SenderId,
+                    LastMessage = message.Content,
+                    NotReadCount = 1,
+                    HasNotRead = true
+                };
+                await _chatsService.SaveItemAsync(chat);
+                
+
+                if (!Chats.Any(c => c.ChatId == chatId))
+                    Chats.Add(chat);
+                else
+                {
+                    chat = Chats.FirstOrDefault(c => c.ChatId == chatId);
+                    int i = Chats.IndexOf(chat);
+                    Chats[i].LastMessage = message.Content;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+
+        }
     }
 }

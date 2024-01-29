@@ -1,9 +1,10 @@
 ﻿namespace Saturn.Constants;
 
-internal static class LocalDBConstants
+public static class LocalDBConstants
 {
-    internal const string DATABASE_FILENAME = "LocalDB.db3";
-    internal const SQLite.SQLiteOpenFlags FLAGS =
+    public const string DATABASE_FILENAME = "SaturnLocalDB.db3";
+
+    public const SQLite.SQLiteOpenFlags FLAGS =
         // open the database in read/write mode
         SQLite.SQLiteOpenFlags.ReadWrite |
         // create the database if it doesn't exist
@@ -11,5 +12,6 @@ internal static class LocalDBConstants
         // enable multi-threaded database access
         SQLite.SQLiteOpenFlags.SharedCache;
 
-    internal static string DatabasePath => System.IO.Path.Combine(FileSystem.AppDataDirectory, DATABASE_FILENAME);
+    public static string DatabasePath =>
+        System.IO.Path.Combine(FileSystem.AppDataDirectory, DATABASE_FILENAME);
 }

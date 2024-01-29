@@ -20,7 +20,7 @@
             Title="Чаты"
             ContentTemplate="{DataTemplate chats:ChatsPage}"
             Route="ShoppingCartPage" 
-            Shell.NavBarIsVisible="True"
+            Shell.NavBarIsVisible="False"
             Icon="chats_icon.png"/>
 
         <ShellContent
