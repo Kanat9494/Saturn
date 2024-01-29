@@ -8,6 +8,8 @@ global using CommunityToolkit.Maui.Markup;
 global using Microsoft.Maui.Controls.Shapes;
 global using Saturn.Views.CustomControls;
 global using Saturn.Services.PartialMethods;
+global using System.ComponentModel.DataAnnotations;
+
 
 
 
