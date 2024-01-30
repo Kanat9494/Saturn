@@ -1,8 +1,8 @@
 ﻿namespace Saturn.Services.Implementations;
 
-internal class LocalMessagesService
+public class LocalMessagesService
 {
-    internal LocalMessagesService()
+    public LocalMessagesService()
     {
 
     }

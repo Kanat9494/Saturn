@@ -4,14 +4,30 @@
              x:Class="Saturn.Views.Chat.ChatsPage"
              xmlns:models="clr-namespace:Saturn.Models"
              Title="ChatsPage">
-    <CollectionView ItemsSource="{Binding Chats, Mode=TwoWay}">
+    <CollectionView ItemsSource="{Binding Chats}">
         <CollectionView.ItemTemplate>
             <DataTemplate x:DataType="models:ChatRoom">
-                <StackLayout>
-                    <Label Text="{Binding Title}" FontAttributes="Bold"/>
-                    <Label Text="{Binding LastMessage}" />
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="90*"/>
+                        <ColumnDefinition Width="10*"/>
 
-                </StackLayout>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="1"/>
+
+                    </Grid.RowDefinitions>
+                    <Label Text="{Binding Title}" FontAttributes="Bold" Grid.Column="0" />
+                    <Label Text="{Binding LastMessage, Mode=TwoWay}" Grid.Column="0" Grid.Row="1"/>
+                    <Border Background="{x:StaticResource Red50}" Grid.Column="1" Grid.RowSpan="2" VerticalOptions="Center"
+                        HeightRequest="20" WidthRequest="20" Stroke="Transparent" StrokeShape="RoundRectangle 10" IsVisible="{Binding HasNotRead}">
+                        <Label Text="{Binding NotReadCount, Mode=TwoWay}" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" TextColor="White"/>
+                    </Border>
+                    <BoxView Grid.Row="2" Background="#e6e6e6" Grid.ColumnSpan="2"/>
+                </Grid>
             </DataTemplate>
         </CollectionView.ItemTemplate>
     </CollectionView>

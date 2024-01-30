@@ -2,6 +2,7 @@
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Widget;
 using AndroidX.Core.App;
 
 namespace Saturn.Platforms.Android.Services.Implementations;
@@ -13,7 +14,7 @@ public class ForegroundServiceDemo : Service
     private int NOTIFICATION_ID = 1;
     private string NOTIFICATION_CHANNEL_NAME = "notification";
 
-    private void StartForegroundService()
+    private async void StartForegroundService()
     {
         var notificationManager = GetSystemService(Context.NotificationService) as NotificationManager;
         if (Build.VERSION.SdkInt >= BuildVersionCodes.O)
@@ -25,7 +26,16 @@ public class ForegroundServiceDemo : Service
         notification.SetSmallIcon(Resource.Mipmap.appicon);
         notification.SetContentTitle("ForegroundService");
         notification.SetContentText("Foreground Service is running");
+
+        
         StartForeground(NOTIFICATION_ID, notification.Build());
+
+        for (int i = 0; i < 50; i++)
+        {
+            System.Diagnostics.Debug.WriteLine("Foreground service is running");
+            Toast.MakeText(this, "Foreground service in running", ToastLength.Short).Show();
+            await Task.Delay(3000);
+        }
     }
 
     private void CreateNotificationChannel(NotificationManager notificationManager)

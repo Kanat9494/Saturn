@@ -1,4 +1,6 @@
 ﻿using Android.App;
+using Android.App.Job;
+using Android.Content;
 using Android.Runtime;
 
 namespace Saturn

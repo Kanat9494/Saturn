@@ -2,9 +2,11 @@
 
 internal class ChatsViewModel : BaseViewModel
 {
-    public ChatsViewModel(LocalChatsService chatsService)
+    public ChatsViewModel(LocalChatsService chatsService, LocalMessagesService messagesService)
     {
         _chatsService = chatsService;
+        _messagesService = messagesService;
+
         Chats = new ObservableCollection<ChatRoom>();
 
         Task.Run(InitializeChats);
@@ -13,6 +15,7 @@ internal class ChatsViewModel : BaseViewModel
     }
 
     private readonly LocalChatsService _chatsService;
+    private readonly LocalMessagesService _messagesService;
 
     private int _userId;
     private int _receiverId;
@@ -132,11 +135,12 @@ internal class ChatsViewModel : BaseViewModel
 
             if (chatId > 0)
             {
+                await CreaeLocalMessage(chatId, message);
                 chat = await _chatsService.GetItemAsync(chatId);
                 chat.Title = $"Aika + {message.SenderId}";
                 chat.SenderId = message.SenderId;
                 chat.LastMessage = message.Content;
-                chat.NotReadCount = 1;
+                chat.NotReadCount++;
                 chat.HasNotRead = true;
                 await _chatsService.SaveItemAsync(chat);
                 chatId = chat.ChatId;
@@ -160,7 +164,9 @@ internal class ChatsViewModel : BaseViewModel
                     HasNotRead = true
                 };
                 await _chatsService.SaveItemAsync(chat);
-                
+                chatId = await _chatsService.HasUserChat(message.SenderId);
+                await CreaeLocalMessage(chatId, message);
+
 
                 if (!Chats.Any(c => c.ChatId == chatId))
                     Chats.Add(chat);
@@ -176,5 +182,11 @@ internal class ChatsViewModel : BaseViewModel
         {
 
         }
+    }
+
+    async Task CreaeLocalMessage(int chatId, Message message)
+    {
+        message.ChatId = chatId;
+        await _messagesService.SaveItemAsync(message);
     }
 }

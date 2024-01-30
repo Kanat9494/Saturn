@@ -32,7 +32,7 @@
 
         <ShellContent
             Title="Аккаунт"
-            ContentTemplate="{DataTemplate views:MainPage}"
+            ContentTemplate="{DataTemplate views:AccountPage}"
             Route="AccountPage" 
             Shell.NavBarIsVisible="False"
             Icon="account_icon.png"/>
