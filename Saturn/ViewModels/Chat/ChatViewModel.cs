@@ -42,7 +42,6 @@ internal class ChatViewModel : BaseViewModel, IQueryAttributable
     async Task InitializeChatMessages()
     {
         var messages = await _messagesService.GetChatMessages(ChatId);
-        var c = await _messagesService.GetItemsAsync();
         if (messages != null)
         {
             for (int i = 0; i < messages.Count; i++)
@@ -65,7 +64,8 @@ internal class ChatViewModel : BaseViewModel, IQueryAttributable
             SentDate = DateTime.Now,
             ChatId = this.ChatId,
         };
-        await RTServerManager.SendMessageAsync(message);
+        var jsonMessage = JsonConvert.SerializeObject(message);
+        await RTServerManager.SendMessageAsync(jsonMessage);
         await _messagesService.SaveItemAsync(message);
         Messages.Add(message);
 

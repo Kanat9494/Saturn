@@ -15,7 +15,7 @@
             <RowDefinition/>
             <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
-        <CollectionView ItemsSource="{Binding Messages}" ItemTemplate="{x:StaticResource chatUITemplate}">
+        <CollectionView ItemsSource="{Binding Messages}" ItemTemplate="{x:StaticResource chatUITemplate}" ItemsUpdatingScrollMode="KeepLastItemInView">
             
         </CollectionView>
 

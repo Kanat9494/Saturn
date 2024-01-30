@@ -37,20 +37,20 @@ internal static class RTServerManager
         }
     }
 
-    internal static async Task SendMessageAsync(Message message)
+    internal static async Task SendMessageAsync(string jsonMessage)
     {
-        var jsonMessage = JsonConvert.SerializeObject(message);
         byte[] data = Encoding.UTF8.GetBytes(jsonMessage);
         await _stream.WriteAsync(data, 0, data.Length);
     }
 
     internal static async Task ReceiveMessage()
     {
+        byte[] data = new byte[64];
+
         while (true)
         {
             try
             {
-                byte[] data = new byte[64];
                 StringBuilder builder = new StringBuilder();
                 int bytes = 0;
                 do

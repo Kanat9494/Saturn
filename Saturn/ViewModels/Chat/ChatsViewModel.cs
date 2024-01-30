@@ -89,16 +89,16 @@ internal class ChatsViewModel : BaseViewModel
             Content = "Новое сообщение"
         };
 
-        await RTServerManager.SendMessageAsync(message);
     }
 
     async Task ReceiveMessage()
     {
+        byte[] data = new byte[64];
+
         while (true)
         {
             try
             {
-                byte[] data = new byte[64];
                 StringBuilder builder = new StringBuilder();
                 int bytes = 0;
                 do
@@ -108,6 +108,8 @@ internal class ChatsViewModel : BaseViewModel
 
                     if (bytes == data.Length)
                         Array.Resize(ref data, data.Length * 2);
+
+                    Debug.WriteLine(builder);
                 }
                 while (_stream.DataAvailable);
 
