@@ -1,4 +1,4 @@
-﻿namespace Saturn.ViewModel;
+﻿namespace Saturn.ViewModels;
 
 internal class MainViewModel : BaseViewModel
 {
@@ -14,6 +14,9 @@ internal class MainViewModel : BaseViewModel
         {
             IsBusy = false;
         });
+
+        RTServerManager.ConnectToRTCServer(1, 54);
+
     }
 
     public ObservableCollection<Product> Products { get; set; }

@@ -2,11 +2,40 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Saturn.Views.Chat.ChatPage"
-             Title="ChatPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             xmlns:models="clr-namespace:Saturn.Models"
+             Title="{Binding Title}"
+             Shell.BackgroundColor="{x:StaticResource Green40}"
+             Shell.TitleColor="White"
+             xmlns:borderlessEntry="clr-namespace:Saturn.Views.CustomControls"
+             xmlns:viewModels="clr-namespace:Saturn.ViewModels.Chat"
+             
+             Shell.TabBarIsVisible="False">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <CollectionView ItemsSource="{Binding Messages}" ItemTemplate="{x:StaticResource chatUITemplate}">
+            
+        </CollectionView>
+
+        <Border Grid.Row="1" Stroke="Transparent" BackgroundColor="{x:StaticResource White78}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="50"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Background="White" Stroke="Transparent" StrokeShape="RoundRectangle 10" Margin="5, 2, 5, 2">
+                    <borderlessEntry:BorderlessEntry Placeholder="Введите сообщение" VerticalOptions="Center" Text="{Binding MessageText}"
+                        Margin="10, 0, 0, 5"/>
+                </Border>
+                <Image Source="send_icon" Grid.Column="1" WidthRequest="25" HorizontalOptions="Center">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:ChatViewModel}}, Path=SendCommand}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </Grid>
+        </Border>
+    </Grid>
 </ContentPage>

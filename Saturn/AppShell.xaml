@@ -19,7 +19,7 @@
         <ShellContent
             Title="Чаты"
             ContentTemplate="{DataTemplate chats:ChatsPage}"
-            Route="ShoppingCartPage" 
+            Route="ChatsPage" 
             Shell.NavBarIsVisible="False"
             Icon="chats_icon.png"/>
 

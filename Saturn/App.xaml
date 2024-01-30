@@ -140,6 +140,31 @@
                 SecondTemplate="{x:StaticResource secondTemplate}"
                 ThirdTemplate="{x:StaticResource thirdTemplate}"
                 FourthTemplate="{x:StaticResource fourthTemplate}"/>
+
+            <DataTemplate x:DataType="models:Message" x:Key="senderMessageTemplate">
+                <Border Stroke="Transparent" StrokeShape="RoundRectangle 10" BackgroundColor="{x:StaticResource RedOrange60}" HorizontalOptions="Start"
+                    Margin="5, 2, 10, 2">
+                    <VerticalStackLayout>
+                        <Label Text="{Binding Content}" FontSize="16" TextColor="White" Margin="3"/>
+                        <Label Text="{Binding SentDate}" FontSize="13" TextColor="White" Margin="5, 0, 5, 0"/>
+
+                    </VerticalStackLayout>
+                </Border>
+            </DataTemplate>
+
+            <DataTemplate x:DataType="models:Message" x:Key="userMessageTemplate">
+                <Border Stroke="Transparent" StrokeShape="RoundRectangle 10" BackgroundColor="{x:StaticResource Pink100}" HorizontalOptions="End"
+                    Margin="10, 2, 5, 2">
+                    <VerticalStackLayout>
+                        <Label Text="{Binding Content}" FontSize="16" TextColor="White" Margin="3"/>
+                        <Label Text="{Binding SentDate}" FontSize="13" TextColor="White" Margin="5, 0, 5, 0"/>
+
+                    </VerticalStackLayout>
+                </Border>
+            </DataTemplate>
+
+            <selectors:ChatUISelector x:Key="chatUITemplate" SenderMessageTemplate="{x:StaticResource senderMessageTemplate}"
+                UserMessageTemplate="{x:StaticResource userMessageTemplate}"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

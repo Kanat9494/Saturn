@@ -1,4 +1,4 @@
-﻿namespace Saturn.ViewModel;
+﻿namespace Saturn.ViewModels;
 
 internal class BaseViewModel : INotifyPropertyChanged
 {

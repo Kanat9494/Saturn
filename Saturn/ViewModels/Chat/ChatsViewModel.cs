@@ -1,4 +1,4 @@
-﻿namespace Saturn.ViewModel.Chat;
+﻿namespace Saturn.ViewModels.Chat;
 
 internal class ChatsViewModel : BaseViewModel
 {
@@ -6,12 +6,15 @@ internal class ChatsViewModel : BaseViewModel
     {
         _chatsService = chatsService;
         _messagesService = messagesService;
+        ChatCommand = new AsyncRelayCommand<int>(OnChat);
 
         Chats = new ObservableCollection<ChatRoom>();
+        AuthFields.UserId = 1;
 
         Task.Run(InitializeChats);
 
-        ConnectToRTCServer();
+        //ConnectToRTCServer();
+        //RTServerManager.ConnectToRTCServer(1, 54);
     }
 
     private readonly LocalChatsService _chatsService;
@@ -22,13 +25,18 @@ internal class ChatsViewModel : BaseViewModel
     private TcpClient? _tcpClient;
     private NetworkStream? _stream;
 
+    private string _title;
+
+    public ICommand ChatCommand { get; set; }
+    
+
     public ObservableCollection<ChatRoom> Chats { get; set; }
 
     private async Task InitializeChats()
     {
         var chats = await _chatsService.GetItemsAsync();
 
-        if (chats != null & chats.Count > 0)
+        if (chats != null)
         {
             for (int i = 0; i < chats.Count; i++)
                 Chats.Add(chats[i]);
@@ -72,18 +80,16 @@ internal class ChatsViewModel : BaseViewModel
         }
     }
 
-    void SendMessage()
+    async void SendMessage()
     {
-        var message = new
+        var message = new Message
         {
-            SenderName = _userId.ToString(),
-            ReceiverName = _receiverId.ToString(),
+            SenderId = _userId,
+            ReceiverId = _receiverId,
             Content = "Новое сообщение"
         };
 
-        var jsonMessage = JsonConvert.SerializeObject(message);
-        byte[] data = Encoding.UTF8.GetBytes(jsonMessage);
-        _stream.Write(data, 0, data.Length);
+        await RTServerManager.SendMessageAsync(message);
     }
 
     async Task ReceiveMessage()
@@ -135,9 +141,10 @@ internal class ChatsViewModel : BaseViewModel
 
             if (chatId > 0)
             {
-                await CreaeLocalMessage(chatId, message);
+                await CreateLocalMessage(chatId, message);
                 chat = await _chatsService.GetItemAsync(chatId);
                 chat.Title = $"Aika + {message.SenderId}";
+                _title = chat.Title;
                 chat.SenderId = message.SenderId;
                 chat.LastMessage = message.Content;
                 chat.NotReadCount++;
@@ -163,9 +170,10 @@ internal class ChatsViewModel : BaseViewModel
                     NotReadCount = 1,
                     HasNotRead = true
                 };
+                _title = chat.Title;
                 await _chatsService.SaveItemAsync(chat);
                 chatId = await _chatsService.HasUserChat(message.SenderId);
-                await CreaeLocalMessage(chatId, message);
+                await CreateLocalMessage(chatId, message);
 
 
                 if (!Chats.Any(c => c.ChatId == chatId))
@@ -184,9 +192,14 @@ internal class ChatsViewModel : BaseViewModel
         }
     }
 
-    async Task CreaeLocalMessage(int chatId, Message message)
+    async Task CreateLocalMessage(int chatId, Message message)
     {
         message.ChatId = chatId;
         await _messagesService.SaveItemAsync(message);
+    }
+
+    private async Task OnChat(int senderId)
+    {
+        await Shell.Current.GoToAsync($"ChatPage?ChatId={senderId}&Title=Aika + {senderId}");
     }
 }

@@ -24,6 +24,12 @@ public class LocalMessagesService
         return await Database.Table<Message>().ToListAsync();
     }
 
+    public async Task<List<Message>> GetChatMessagesAsync(int chatId)
+    {
+        await Init();
+        return await Database.Table<Message>().Where(m => m.ChatId == chatId).ToListAsync();
+    }
+
     public async Task<int> SaveItemAsync(Message message)
     {
         await Init();
@@ -39,9 +45,9 @@ public class LocalMessagesService
         return await Database.DeleteAsync(message);
     }
 
-    public async Task<List<Message>> GetChatMessages(int chatId)
+    public async Task<List<Message>> GetChatMessages(int senderId)
     {
         await Init();
-        return await Database.Table<Message>().Where(m => m.ChatId == chatId).ToListAsync();
+        return await Database.Table<Message>().Where(m => m.SenderId == senderId).ToListAsync();
     }
 }

@@ -5,6 +5,12 @@
         public AppShell()
         {
             InitializeComponent();
+            RegisterRoutingPages();
+        }
+
+        private void RegisterRoutingPages()
+        {
+            Routing.RegisterRoute(nameof(ChatPage), typeof(ChatPage));
         }
     }
 }
