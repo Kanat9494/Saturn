@@ -9,6 +9,7 @@ internal class ChatsViewModel : BaseViewModel
         ChatCommand = new AsyncRelayCommand<int>(OnChat);
 
         Chats = new ObservableCollection<ChatRoom>();
+        RTServerManager.MessageReceivedEvent += HandleMessageReceived;
         AuthFields.UserId = 1;
 
         Task.Run(InitializeChats);
@@ -80,17 +81,6 @@ internal class ChatsViewModel : BaseViewModel
         }
     }
 
-    async void SendMessage()
-    {
-        var message = new Message
-        {
-            SenderId = _userId,
-            ReceiverId = _receiverId,
-            Content = "Новое сообщение"
-        };
-
-    }
-
     async Task ReceiveMessage()
     {
         byte[] data = new byte[64];
@@ -131,6 +121,14 @@ internal class ChatsViewModel : BaseViewModel
             _tcpClient.Close();
 
         //Environment.Exit(0);
+    }
+
+    private void HandleMessageReceived(object sender, string jsonMessage)
+    {
+        Task.Run(async () =>
+        {
+            await HasUserChat(jsonMessage);
+        });
     }
 
     private async Task HasUserChat(string json)

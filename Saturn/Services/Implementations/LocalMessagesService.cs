@@ -45,9 +45,9 @@ public class LocalMessagesService
         return await Database.DeleteAsync(message);
     }
 
-    public async Task<List<Message>> GetChatMessages(int senderId)
+    public async Task<List<Message>> GetChatMessages(int chatId)
     {
         await Init();
-        return await Database.Table<Message>().Where(m => m.SenderId == senderId).ToListAsync();
+        return await Database.Table<Message>().Where(m => m.ChatId == chatId).ToListAsync();
     }
 }
