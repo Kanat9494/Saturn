@@ -5,6 +5,8 @@ public partial class AccountPage : ContentPage
 	public AccountPage()
 	{
 		InitializeComponent();
+
+        versionText.Text = AppInfo.VersionString;
 	}
 
     private void OnStartServiceClicked(object sender, EventArgs e)

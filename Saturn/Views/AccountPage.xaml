@@ -7,7 +7,18 @@
         <Label 
             Text="Welcome to .NET MAUI!"
             VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+            HorizontalOptions="Center" 
+            />
+
+        <Label 
+            x:Name="versionText"
+            TextColor="#999999"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" 
+            Margin="0, 20, 0, 20"
+            FontAttributes="Bold"
+            FontSize="16"
+            />  
 
         <Button Clicked="OnStartServiceClicked" Text="Start"/>
     </VerticalStackLayout>
