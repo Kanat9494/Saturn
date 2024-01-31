@@ -1,17 +1,11 @@
 ﻿namespace Saturn.Helpers;
 
-public delegate void MessageReceivedEventHandler(object sender, string jsonMessage);
-
-
 internal static class RTServerManager
 {
     private static int _userId;
     private static int _receiverId;
     private static TcpClient? _tcpClient;
     private static NetworkStream? _stream;
-
-    internal static event MessageReceivedEventHandler? MessageReceivedEvent;
-
 
     internal static void ConnectToRTCServer(int userId, int receiverId)
     {
@@ -67,14 +61,12 @@ internal static class RTServerManager
                     if (bytes == data.Length)
                         Array.Resize(ref data, data.Length * 2);
 
-                    NotifyMessageReceivedEvent(builder.ToString());
+                    RTMessageHelper.NotifyMessageReceivedEvent(builder.ToString());
 
 
                 }
                 while (_stream.DataAvailable);
 
-                //await HasUserChat(builder.ToString());
-                //Debug.WriteLine(c);
             }
             catch (Exception ex)
             {
@@ -91,13 +83,5 @@ internal static class RTServerManager
             _tcpClient.Close();
 
         //Environment.Exit(0);
-    }
-
-    internal static void NotifyMessageReceivedEvent(string jsonMessage)
-    {
-        if (MessageReceivedEvent != null)
-        {
-            MessageReceivedEvent.Invoke(null, jsonMessage);
-        }
     }
 }

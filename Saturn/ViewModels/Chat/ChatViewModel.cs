@@ -117,12 +117,12 @@ internal class ChatViewModel : BaseViewModel, IQueryAttributable
 
     internal void OnApearing()
     {
-        RTServerManager.MessageReceivedEvent += HandleMessageReceived;
+        RTMessageHelper.MessageReceivedEvent += HandleMessageReceived;
     }
 
     internal void OnDisappearing()
     {
-        RTServerManager.MessageReceivedEvent -= HandleMessageReceived;
+        RTMessageHelper.MessageReceivedEvent -= HandleMessageReceived;
     }
 
     #region Query params

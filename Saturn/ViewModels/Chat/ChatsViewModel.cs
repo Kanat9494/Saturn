@@ -219,13 +219,13 @@ internal class ChatsViewModel : BaseViewModel
 
     internal void OnAppearing()
     {
-        RTServerManager.MessageReceivedEvent += HandleMessageReceived;
+        RTMessageHelper.MessageReceivedEvent += HandleMessageReceived;
 
     }
 
     internal void OnDisappearing()
     {
-        RTServerManager.MessageReceivedEvent -= HandleMessageReceived;
+        RTMessageHelper.MessageReceivedEvent -= HandleMessageReceived;
 
     }
 }
