@@ -197,7 +197,7 @@ internal class ChatsViewModel : BaseViewModel
         await _messagesService.SaveItemAsync(message);
     }
 
-    private async Task OnChat(ChatRoom chat)
+    private async Task OnChat(ChatRoom? chat)
     {
         //await Shell.Current.GoToAsync($"ChatPage?Chat?{chat}");
         var navigationParameter = new ShellNavigationQueryParameters

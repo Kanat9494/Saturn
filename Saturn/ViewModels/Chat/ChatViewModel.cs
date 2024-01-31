@@ -2,9 +2,11 @@
 
 internal class ChatViewModel : BaseViewModel, IQueryAttributable
 {
-    public ChatViewModel(LocalMessagesService messagesService)
+    public ChatViewModel(LocalMessagesService messagesService, LocalChatsService chatsService)
     {
         _messagesService = messagesService;
+        _chatsService = chatsService;
+
 
         Messages = new ObservableCollection<Message>();
 
@@ -14,6 +16,7 @@ internal class ChatViewModel : BaseViewModel, IQueryAttributable
     }
 
     private readonly LocalMessagesService _messagesService;
+    private readonly LocalChatsService _chatsService;
     public ObservableCollection<Message> Messages { get; set; }
 
     private int _userId;
@@ -35,6 +38,9 @@ internal class ChatViewModel : BaseViewModel, IQueryAttributable
 
     async Task InitializeChatMessages()
     {
+        Chat.HasNotRead = false;
+        Chat.NotReadCount = 0;
+        await _chatsService.SaveItemAsync(Chat);
         var messages = await _messagesService.GetChatMessages(Chat.ChatId);
         if (messages != null)
         {
@@ -50,11 +56,10 @@ internal class ChatViewModel : BaseViewModel, IQueryAttributable
         if (string.IsNullOrWhiteSpace(MessageText))
             return;
 
-        var receiverId = await _messagesService.GetReceiverId(Chat.ChatId);
 
         var message = new Message
         {
-            ReceiverId = receiverId,
+            ReceiverId = Chat.SenderId,
             SenderId = _userId,
             Content = MessageText,
             SentDate = DateTime.Now,
@@ -66,6 +71,45 @@ internal class ChatViewModel : BaseViewModel, IQueryAttributable
         Messages.Add(message);
 
         MessageText = string.Empty;
+    }
+
+    private void HandleMessageReceived(object sender, string jsonMessage)
+    {
+        Task.Run(async () =>
+        {
+            await HasUserMessage(jsonMessage);
+        });
+    }
+
+    async Task CreateLocalMessage(Message message)
+    {
+        await _messagesService.SaveItemAsync(message);
+        Debug.WriteLine(message.MessageId + "  " + message.ChatId + " userId: " + message.ReceiverId);
+    }
+
+    async Task HasUserMessage(string jsonMessage)
+    {
+        var message = JsonConvert.DeserializeObject<Message>(jsonMessage);
+        var chatId = await _chatsService.HasUserChat(message.SenderId);
+        message.ChatId = chatId;
+        try
+        {
+            await _messagesService.SaveItemAsync(message);
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+        }
+    }
+
+    internal void OnApearing()
+    {
+        RTServerManager.MessageReceivedEvent += HandleMessageReceived;
+    }
+
+    internal void OnDisappearing()
+    {
+        RTServerManager.MessageReceivedEvent -= HandleMessageReceived;
     }
 
     #region Query params

@@ -67,7 +67,7 @@ internal static class RTServerManager
                     if (bytes == data.Length)
                         Array.Resize(ref data, data.Length * 2);
 
-                    RaiseMessageReceivedEvent(builder.ToString());
+                    NotifyMessageReceivedEvent(builder.ToString());
 
 
                 }
@@ -93,7 +93,7 @@ internal static class RTServerManager
         //Environment.Exit(0);
     }
 
-    internal static void RaiseMessageReceivedEvent(string jsonMessage)
+    internal static void NotifyMessageReceivedEvent(string jsonMessage)
     {
         if (MessageReceivedEvent != null)
         {
