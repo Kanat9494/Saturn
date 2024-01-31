@@ -90,16 +90,18 @@ internal class ChatViewModel : BaseViewModel, IQueryAttributable
     async Task HasUserMessage(string jsonMessage)
     {
         var message = JsonConvert.DeserializeObject<Message>(jsonMessage);
-        var chatId = await _chatsService.HasUserChat(message.SenderId);
+
+        int chatId;
+        if (message.SenderId != Chat.SenderId)
+            chatId = await _chatsService.HasUserChat(message.SenderId);
+        else
+            chatId = Chat.ChatId;
+
         message.ChatId = chatId;
-        try
-        {
-            await _messagesService.SaveItemAsync(message);
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine(ex.Message);
-        }
+       
+        await _messagesService.SaveItemAsync(message);
+        if (message.SenderId == Chat.SenderId)
+            Messages.Add(message);
     }
 
     internal void OnApearing()
