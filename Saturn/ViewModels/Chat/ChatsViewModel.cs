@@ -9,6 +9,7 @@ internal class ChatsViewModel : BaseViewModel
         ChatCommand = new AsyncRelayCommand<ObservableChatRoom>(OnChat);
 
         Chats = new ObservableCollection<ObservableChatRoom>();
+        RTMessageHelper.ChatLMChangedEvent += HandleChatLMChanged;
         AuthFields.UserId = 1;
 
         Task.Run(InitializeChats);
@@ -132,6 +133,18 @@ internal class ChatsViewModel : BaseViewModel
         {
             await HasUserChat(jsonMessage);
         });
+    }
+
+    private void HandleChatLMChanged(object sender, int userId, string lastMessage, bool isOtherChat)
+    {
+        observableChat = Chats.FirstOrDefault(c => c.SenderId == userId);
+        int i = Chats.IndexOf(observableChat);
+        Chats[i].LastMessage = lastMessage;
+        if (isOtherChat)
+        {
+            Chats[i].HasNotRead = true;
+            Chats[i].NotReadCount++;
+        }
     }
 
     private async Task HasUserChat(string json)

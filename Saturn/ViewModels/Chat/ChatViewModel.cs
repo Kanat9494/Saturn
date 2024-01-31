@@ -82,6 +82,8 @@ internal class ChatViewModel : BaseViewModel, IQueryAttributable
         Messages.Add(message);
 
         MessageText = string.Empty;
+
+        RTMessageHelper.NotifyChatLMChangedEvent(message.ReceiverId, message.Content, message.SenderId == Chat.SenderId);
     }
 
     private void HandleMessageReceived(object sender, string jsonMessage)
@@ -113,6 +115,8 @@ internal class ChatViewModel : BaseViewModel, IQueryAttributable
         await _messagesService.SaveItemAsync(message);
         if (message.SenderId == Chat.SenderId)
             Messages.Add(message);
+
+        RTMessageHelper.NotifyChatLMChangedEvent(message.SenderId, message.Content, message.SenderId != Chat.SenderId);
     }
 
     internal void OnApearing()
