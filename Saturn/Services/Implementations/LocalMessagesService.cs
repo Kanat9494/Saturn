@@ -50,4 +50,11 @@ public class LocalMessagesService
         await Init();
         return await Database.Table<Message>().Where(m => m.ChatId == chatId).ToListAsync();
     }
+
+    public async Task<int> GetReceiverId(int chatId)
+    {
+        await Init();
+        var chat = await Database.Table<Message>().FirstOrDefaultAsync(m => m.ChatId == chatId);
+        return chat?.SenderId ?? 0;
+    }
 }

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Saturn.Views.Chat.ChatPage"
              xmlns:models="clr-namespace:Saturn.Models"
-             Title="{Binding Title}"
+             Title="{Binding Chat.Title}"
              Shell.BackgroundColor="{x:StaticResource Green40}"
              Shell.TitleColor="White"
              xmlns:borderlessEntry="clr-namespace:Saturn.Views.CustomControls"

@@ -25,13 +25,13 @@
                     <Label Text="{Binding Title}" FontAttributes="Bold" Grid.Column="0" />
                     <Label Text="{Binding LastMessage, Mode=TwoWay}" Grid.Column="0" Grid.Row="1" LineBreakMode="NoWrap"/>
                     <Border Background="{x:StaticResource Red50}" Grid.Column="1" Grid.RowSpan="2" VerticalOptions="Center"
-                    HeightRequest="20" WidthRequest="20" Stroke="Transparent" StrokeShape="RoundRectangle 10" IsVisible="{Binding HasNotRead}">
+                        HeightRequest="20" WidthRequest="20" Stroke="Transparent" StrokeShape="RoundRectangle 10" IsVisible="{Binding HasNotRead}">
                         <Label Text="{Binding NotReadCount, Mode=TwoWay}" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" TextColor="White"/>
                     </Border>
                     <BoxView Grid.Row="2" Background="#e6e6e6" Grid.ColumnSpan="2"/>
 
                     <Grid.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:ChatsViewModel}}, Path=ChatCommand}" CommandParameter="{Binding ChatId}"/>
+                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:ChatsViewModel}}, Path=ChatCommand}" CommandParameter="{Binding .}"/>
                     </Grid.GestureRecognizers>
                 </Grid>
             </DataTemplate>

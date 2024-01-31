@@ -20,17 +20,11 @@ internal class ChatViewModel : BaseViewModel, IQueryAttributable
 
     public ICommand SendCommand { get; set; }
 
-    private int _chatId;
-    public int ChatId
+    private ChatRoom _chat;
+    public ChatRoom Chat
     {
-        get => _chatId;
-        set => SetProperty(ref _chatId, value);
-    }
-    private string _title;
-    public string Title
-    {
-        get => _title;
-        set => SetProperty(ref _title, value);
+        get => _chat;
+        set => SetProperty(ref _chat, value);
     }
     private string _messageText;
     public string MessageText
@@ -41,7 +35,7 @@ internal class ChatViewModel : BaseViewModel, IQueryAttributable
 
     async Task InitializeChatMessages()
     {
-        var messages = await _messagesService.GetChatMessages(ChatId);
+        var messages = await _messagesService.GetChatMessages(Chat.ChatId);
         if (messages != null)
         {
             for (int i = 0; i < messages.Count; i++)
@@ -56,13 +50,15 @@ internal class ChatViewModel : BaseViewModel, IQueryAttributable
         if (string.IsNullOrWhiteSpace(MessageText))
             return;
 
+        var receiverId = await _messagesService.GetReceiverId(Chat.ChatId);
+
         var message = new Message
         {
-            ReceiverId = 54,
+            ReceiverId = receiverId,
             SenderId = _userId,
             Content = MessageText,
             SentDate = DateTime.Now,
-            ChatId = this.ChatId,
+            ChatId = Chat.ChatId,
         };
         var jsonMessage = JsonConvert.SerializeObject(message);
         await RTServerManager.SendMessageAsync(jsonMessage);
@@ -75,8 +71,8 @@ internal class ChatViewModel : BaseViewModel, IQueryAttributable
     #region Query params
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
-        ChatId = int.Parse(HttpUtility.UrlDecode(query["ChatId"]?.ToString() ?? "1"));
-        Title = HttpUtility.UrlDecode(query["Title"]?.ToString() ?? "");
+        //ChatId = int.Parse(HttpUtility.UrlDecode(query["ChatId"]?.ToString() ?? "1"));
+        Chat = query["Chat"] as ChatRoom;
 
         Task.Run(async () =>
         {

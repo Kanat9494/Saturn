@@ -6,10 +6,9 @@ internal class ChatsViewModel : BaseViewModel
     {
         _chatsService = chatsService;
         _messagesService = messagesService;
-        ChatCommand = new AsyncRelayCommand<int>(OnChat);
+        ChatCommand = new AsyncRelayCommand<ChatRoom>(OnChat);
 
         Chats = new ObservableCollection<ChatRoom>();
-        RTServerManager.MessageReceivedEvent += HandleMessageReceived;
         AuthFields.UserId = 1;
 
         Task.Run(InitializeChats);
@@ -198,8 +197,26 @@ internal class ChatsViewModel : BaseViewModel
         await _messagesService.SaveItemAsync(message);
     }
 
-    private async Task OnChat(int senderId)
+    private async Task OnChat(ChatRoom chat)
     {
-        await Shell.Current.GoToAsync($"ChatPage?ChatId={senderId}&Title=Aika + {senderId}");
+        //await Shell.Current.GoToAsync($"ChatPage?Chat?{chat}");
+        var navigationParameter = new ShellNavigationQueryParameters
+        {
+            {"Chat", chat }
+        };
+
+        await Shell.Current.GoToAsync("ChatPage", navigationParameter);
+    }
+
+    internal void OnAppearing()
+    {
+        RTServerManager.MessageReceivedEvent += HandleMessageReceived;
+
+    }
+
+    internal void OnDisappearing()
+    {
+        RTServerManager.MessageReceivedEvent -= HandleMessageReceived;
+
     }
 }
