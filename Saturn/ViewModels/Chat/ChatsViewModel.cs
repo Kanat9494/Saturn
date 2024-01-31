@@ -6,9 +6,9 @@ internal class ChatsViewModel : BaseViewModel
     {
         _chatsService = chatsService;
         _messagesService = messagesService;
-        ChatCommand = new AsyncRelayCommand<ChatRoom>(OnChat);
+        ChatCommand = new AsyncRelayCommand<ObservableChatRoom>(OnChat);
 
-        Chats = new ObservableCollection<ChatRoom>();
+        Chats = new ObservableCollection<ObservableChatRoom>();
         AuthFields.UserId = 1;
 
         Task.Run(InitializeChats);
@@ -28,9 +28,13 @@ internal class ChatsViewModel : BaseViewModel
     private string _title;
 
     public ICommand ChatCommand { get; set; }
-    
 
-    public ObservableCollection<ChatRoom> Chats { get; set; }
+    ObservableChatRoom observableChat;
+    ChatRoom chat;
+
+
+
+    public ObservableCollection<ObservableChatRoom> Chats { get; set; }
 
     private async Task InitializeChats()
     {
@@ -39,7 +43,7 @@ internal class ChatsViewModel : BaseViewModel
         if (chats != null)
         {
             for (int i = 0; i < chats.Count; i++)
-                Chats.Add(chats[i]);
+                Chats.Add(new ObservableChatRoom(chats[i]));
         }
     }
 
@@ -134,7 +138,6 @@ internal class ChatsViewModel : BaseViewModel
     {
         try
         {
-            ChatRoom chat;
             var message = JsonConvert.DeserializeObject<Message>(json);
             var chatId = await _chatsService.HasUserChat(message.SenderId);
 
@@ -150,13 +153,17 @@ internal class ChatsViewModel : BaseViewModel
                 chat.HasNotRead = true;
                 await _chatsService.SaveItemAsync(chat);
                 chatId = chat.ChatId;
+
+
                 if (!Chats.Any(c => c.ChatId == chatId))
-                    Chats.Add(chat);
+                    Chats.Add(new ObservableChatRoom(chat));
                 else
                 {
-                    chat = Chats.FirstOrDefault(c => c.ChatId == chatId);
-                    int i = Chats.IndexOf(chat);
+                    observableChat = Chats.FirstOrDefault(c => c.ChatId == chatId);
+                    int i = Chats.IndexOf(observableChat!);
                     Chats[i].LastMessage = message.Content;
+                    Chats[i].HasNotRead = true;
+                    Chats[i].NotReadCount++;
                 }
             }
             else
@@ -176,12 +183,14 @@ internal class ChatsViewModel : BaseViewModel
 
 
                 if (!Chats.Any(c => c.ChatId == chatId))
-                    Chats.Add(chat);
+                    Chats.Add(new ObservableChatRoom(chat));
                 else
                 {
-                    chat = Chats.FirstOrDefault(c => c.ChatId == chatId);
-                    int i = Chats.IndexOf(chat);
+                    observableChat = Chats.FirstOrDefault(c => c.ChatId == chatId);
+                    int i = Chats.IndexOf(observableChat);
                     Chats[i].LastMessage = message.Content;
+                    Chats[i].HasNotRead = true;
+                    Chats[i].NotReadCount++;
                 }
             }
         }
@@ -197,7 +206,7 @@ internal class ChatsViewModel : BaseViewModel
         await _messagesService.SaveItemAsync(message);
     }
 
-    private async Task OnChat(ChatRoom? chat)
+    private async Task OnChat(ObservableChatRoom? chat)
     {
         //await Shell.Current.GoToAsync($"ChatPage?Chat?{chat}");
         var navigationParameter = new ShellNavigationQueryParameters

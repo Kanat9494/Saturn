@@ -6,9 +6,9 @@
              xmlns:viewModels="clr-namespace:Saturn.ViewModels.Chat"
              Title="ChatsPage"
              >
-    <CollectionView ItemsSource="{Binding Chats}">
+    <CollectionView ItemsSource="{Binding Chats, Mode=TwoWay}" >
         <CollectionView.ItemTemplate>
-            <DataTemplate x:DataType="models:ChatRoom">
+            <DataTemplate x:DataType="models:ObservableChatRoom">
                 <Grid Margin="5, 5, 5, 0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="90*"/>

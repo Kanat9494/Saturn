@@ -22,6 +22,8 @@ global using System.Windows.Input;
 global using CommunityToolkit.Mvvm.Input;
 global using System.Web;
 global using Saturn.Helpers;
+global using CommunityToolkit.Mvvm.ComponentModel;
+
 
 
 

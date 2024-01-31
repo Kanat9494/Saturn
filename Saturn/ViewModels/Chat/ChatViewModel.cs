@@ -23,8 +23,8 @@ internal class ChatViewModel : BaseViewModel, IQueryAttributable
 
     public ICommand SendCommand { get; set; }
 
-    private ChatRoom _chat;
-    public ChatRoom Chat
+    private ObservableChatRoom _chat;
+    public ObservableChatRoom Chat
     {
         get => _chat;
         set => SetProperty(ref _chat, value);
@@ -38,9 +38,20 @@ internal class ChatViewModel : BaseViewModel, IQueryAttributable
 
     async Task InitializeChatMessages()
     {
-        Chat.HasNotRead = false;
-        Chat.NotReadCount = 0;
-        await _chatsService.SaveItemAsync(Chat);
+        if (Chat.HasNotRead)
+        {
+            Chat.HasNotRead = false;
+            Chat.NotReadCount = 0;
+            await _chatsService.SaveItemAsync(new ChatRoom
+            {
+                ChatId = Chat.ChatId,
+                Title = Chat.Title,
+                SenderId = Chat.SenderId,
+                LastMessage = Chat.LastMessage,
+                NotReadCount = Chat.NotReadCount,
+                HasNotRead = Chat.HasNotRead,
+            });
+        }
         var messages = await _messagesService.GetChatMessages(Chat.ChatId);
         if (messages != null)
         {
@@ -118,7 +129,7 @@ internal class ChatViewModel : BaseViewModel, IQueryAttributable
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
         //ChatId = int.Parse(HttpUtility.UrlDecode(query["ChatId"]?.ToString() ?? "1"));
-        Chat = query["Chat"] as ChatRoom;
+        Chat = query["Chat"] as ObservableChatRoom;
 
         Task.Run(async () =>
         {

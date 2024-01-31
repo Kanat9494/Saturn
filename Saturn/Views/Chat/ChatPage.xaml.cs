@@ -6,7 +6,9 @@ public partial class ChatPage : ContentPage
 	{
 		InitializeComponent();
 
-		BindingContext = _viewModel = new ChatViewModel(messagesService, chatsService);	
+		BindingContext = _viewModel = new ChatViewModel(messagesService, chatsService);
+
+		//contentCV.ScrollTo(_viewModel.Messages.Last());
 	}
 
 	ChatViewModel _viewModel;
