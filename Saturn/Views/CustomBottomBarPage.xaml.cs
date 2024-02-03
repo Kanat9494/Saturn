@@ -16,6 +16,5 @@ public partial class CustomBottomBarPage : ContentPage
 
 	private void ToSecondPage(object sender, EventArgs e)
 	{
-		MainPage = new SecondPage();
 	}
 }
