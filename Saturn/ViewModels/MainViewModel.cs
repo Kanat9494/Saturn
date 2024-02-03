@@ -15,7 +15,7 @@ internal class MainViewModel : BaseViewModel
             IsBusy = false;
         });
 
-        RTServerManager.ConnectToRTCServer(1, 54);
+        //RTServerManager.ConnectToRTCServer(1, 54);
 
     }
 

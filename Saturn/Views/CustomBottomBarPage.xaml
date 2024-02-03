@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Saturn.Views.CustomBottomBarPage"
+             Title="CustomBottomBarPage"
+             Shell.TabBarIsVisible="False">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="70"/>
+        </Grid.RowDefinitions>
+        <Label 
+            Text="Main Page"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+        <Border Stroke="Transparent" StrokeShape="RoundRectangle 10" BackgroundColor="Grey" 
+            Grid.Row="1" Margin="10, 0, 10, 10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="50*"/>
+
+                </Grid.ColumnDefinitions>
+                <Button Text="Main" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White" FontSize="19" FontAttributes="Bold"
+                    BackgroundColor="Transparent"/>
+                <Button Text="Second" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White"
+                    FontSize="19" FontAttributes="Bold" Background="Transparent"/>
+
+            </Grid>
+        </Border>
+    </Grid>
+</ContentPage>
