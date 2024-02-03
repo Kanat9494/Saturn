@@ -69,6 +69,17 @@ public class MauiVideoPlayer : CoordinatorLayout, MediaPlayer.IOnPreparedListene
             status = _videoView.IsPlaying ? VideoStatus.Playing : VideoStatus.Paused;
 
         ((IVideoController)_video).Status = status;
+
+        TimeSpan timeSpan = TimeSpan.FromMilliseconds(_videoView.CurrentPosition);
+        _video.Position = timeSpan;
+    }
+
+    public void UpdatePosition()
+    {
+        if (Math.Abs(_videoView.CurrentPosition - _video.Position.TotalMilliseconds) > 1000)
+        {
+            _videoView.SeekTo((int)_video.Position.TotalMilliseconds);
+        }
     }
 
     public void UpdateTransportControlsEnabled()

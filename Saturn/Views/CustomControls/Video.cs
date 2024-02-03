@@ -81,7 +81,6 @@ public class Video : View, IVideoController
         get => Status;
         set => SetValue(StatusPropertyKey, value);
     }
-    public TimeSpan Duration { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
     public event EventHandler UpdateStatus;
     IDispatcherTimer _timer;
@@ -92,5 +91,48 @@ public class Video : View, IVideoController
     {
         UpdateStatus?.Invoke(this, EventArgs.Empty);
         Handler?.Invoke(nameof(Video.UpdateStatus));
+    }
+
+    private static readonly BindablePropertyKey DurationPropertyKey =
+            BindableProperty.CreateReadOnly(nameof(Duration), typeof(TimeSpan), typeof(Video), new TimeSpan(),
+                propertyChanged: (bindable, oldValue, newValue) => ((Video)bindable).SetTimeToEnd());
+
+    public static readonly BindableProperty DurationProperty = DurationPropertyKey.BindableProperty;
+
+    public TimeSpan Duration
+    {
+        get { return (TimeSpan)GetValue(DurationProperty); }
+    }
+
+    TimeSpan IVideoController.Duration
+    {
+        get { return Duration; }
+        set { SetValue(DurationPropertyKey, value); }
+    }
+
+    public static readonly BindableProperty PositionProperty =
+            BindableProperty.Create(nameof(Position), typeof(TimeSpan), typeof(Video), new TimeSpan(),
+                propertyChanged: (bindable, oldValue, newValue) => ((Video)bindable).SetTimeToEnd());
+
+    public TimeSpan Position
+    {
+        get { return (TimeSpan)GetValue(PositionProperty); }
+        set { SetValue(PositionProperty, value); }
+    }
+
+    private static readonly BindablePropertyKey TimeToEndPropertyKey =
+            BindableProperty.CreateReadOnly(nameof(TimeToEnd), typeof(TimeSpan), typeof(Video), new TimeSpan());
+
+    public static readonly BindableProperty TimeToEndProperty = TimeToEndPropertyKey.BindableProperty;
+
+    public TimeSpan TimeToEnd
+    {
+        get { return (TimeSpan)GetValue(TimeToEndProperty); }
+        private set { SetValue(TimeToEndPropertyKey, value); }
+    }
+
+    void SetTimeToEnd()
+    {
+        TimeToEnd = Duration - Position;
     }
 }

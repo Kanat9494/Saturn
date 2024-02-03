@@ -108,6 +108,25 @@ public class MauiVideoPlayer : Grid, IDisposable
         }
     }
 
+    public void UpdatePosition()
+    {
+        if (_isMediaPlayerAttached)
+        {
+            if (Math.Abs((_mediaPlayerElement.MediaPlayer.Position - _video.Position).TotalSeconds) > 1)
+            {
+                _mediaPlayerElement.MediaPlayer.Position = _video.Position;
+            }
+        }
+    }
+
+    void OnMediaPlayerMediaOpened(MediaPlayer sender, object args)
+    {
+        MainThread.BeginInvokeOnMainThread(() =>
+        {
+            ((IVideoController)_video).Duration = _mediaPlayerElement.MediaPlayer.NaturalDuration;
+        });
+    }
+
     public void PlayRequested(TimeSpan position)
     {
         _video.Play();
