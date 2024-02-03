@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Saturn.Views.AccountPage"
              Title="AccountPage"
-             xmlns:controls="clr-namespace:Saturn.Views.CustomControls"
              >
     <VerticalStackLayout>
         <Label 
@@ -22,8 +21,7 @@
             FontSize="16"
             /> 
         
-        <controls:Video x:Name="video"
-            Source="https://archive.org/download/BigBuckBunny_328/BigBuckBunny_512kb.mp4" />
+        
 
         <Button Clicked="OnStartServiceClicked" Text="Start"/>
 
