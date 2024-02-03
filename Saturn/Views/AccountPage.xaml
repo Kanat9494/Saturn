@@ -23,6 +23,5 @@
 
         <Button Clicked="OnStartServiceClicked" Text="Start"/>
 
-        <Button Clicked="OnGoToCustomBottomBarPage" Text="Go to custom bottom borders"/> 
     </VerticalStackLayout>
 </ContentPage>
