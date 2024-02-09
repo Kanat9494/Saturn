@@ -13,10 +13,12 @@ internal class ClientWSManager
         {
             _userId = userId;
             _clientWS = new ClientWebSocket();
-            
 
-            Task receiveMessageTask = new Task(async () => await ReceiveMessage(_userId));
-            receiveMessageTask.Start();
+
+            Task.Run(async () =>
+            {
+                await ReceiveMessage(_userId);
+            });
         }
         catch (Exception ex)
         {
@@ -26,13 +28,12 @@ internal class ClientWSManager
 
     internal static async Task ReceiveMessage(ulong userId)
     {
-        await _clientWS.ConnectAsync(new Uri(_uri + userId), CancellationToken.None);
-        byte[] data = new byte[1024 * 4];
-
-        StringBuilder messageBuilder = new StringBuilder();
-
         try
         {
+            await _clientWS.ConnectAsync(new Uri(_uri + userId), CancellationToken.None);
+            byte[] data = new byte[1024 * 4];
+
+            StringBuilder messageBuilder = new StringBuilder();
             while (true)
             {
                 var receiveResult = await _clientWS.ReceiveAsync(new ArraySegment<byte>(data), CancellationToken.None);
@@ -53,7 +54,7 @@ internal class ClientWSManager
         }
         catch (Exception ex)
         {
-
+            //await Shell.Current.DisplayAlert("Ошибка", $"Не удалось подключиться к серверу: {ex.Message}", "Ок");
         }
     }
 

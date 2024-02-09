@@ -3,27 +3,32 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Saturn.Views.AccountPage"
              Title="AccountPage"
+             Shell.NavBarIsVisible="False"
              >
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" 
-            />
+    <ScrollView>
+        <VerticalStackLayout>
+            <Label 
+                Text="Welcome to .NET MAUI!"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" 
+                />
 
-        <Label 
-            x:Name="versionText"
-            TextColor="#999999"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" 
-            Margin="0, 20, 0, 20"
-            FontAttributes="Bold"
-            FontSize="16"
-            /> 
-        
-        
+            <Label 
+                x:Name="versionText"
+                TextColor="#999999"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" 
+                Margin="0, 20, 0, 20"
+                FontAttributes="Bold"
+                FontSize="16"
+                />
 
-        <Button Clicked="OnStartServiceClicked" Text="Start"/>
+            <Button Text="Выйти" Command="{Binding SignOutCommand}" Margin="10" BackgroundColor="{x:StaticResource Green40}" VerticalOptions="Center"/>
 
-    </VerticalStackLayout>
+
+
+            <Button Clicked="OnStartServiceClicked" Text="Start" VerticalOptions="Center" Margin="10, 0, 10, 0"/>
+        </VerticalStackLayout>
+
+    </ScrollView>
 </ContentPage>

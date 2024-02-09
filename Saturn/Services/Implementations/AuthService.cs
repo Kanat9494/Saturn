@@ -16,7 +16,7 @@ internal class AuthService
         return _instance;
     }
 
-    protected internal bool IsUserAuthenticated()
+    protected internal static bool IsUserAuthenticated()
     {
         string isUserAuthenticated = "";
         Task.Run(async () =>
@@ -28,5 +28,19 @@ internal class AuthService
             return true;
 
         return false;
+    }
+
+    protected internal static async Task SignIn(string authState)
+    {
+        await SecureStorage.Default.SetAsync("authState", "1");
+
+        await Shell.Current.GoToAsync("//MainPage");
+    }
+
+    protected internal static async Task SignOut(string authState)
+    {
+        await SecureStorage.Default.SetAsync("authState", "0");
+
+        await Shell.Current.GoToAsync("//SignInPage");
     }
 }

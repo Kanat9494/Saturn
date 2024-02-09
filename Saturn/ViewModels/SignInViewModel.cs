@@ -11,8 +11,6 @@ internal class SignInViewModel : BaseViewModel
 
     private async Task OnSignIn()
     {
-        await SecureStorage.Default.SetAsync("authState", "1");
-
-        await Shell.Current.GoToAsync("//MainPage");
+        await AuthService.SignIn("1");
     }
 }

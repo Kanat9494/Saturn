@@ -5,7 +5,7 @@
              Title="SignInPage">
     <ScrollView>
         <Grid>
-            <Button Text="Войти" Margin="10" VerticalOptions="Center" Command="{Binding SignInCommand}"/>
+            <Button Text="Войти" Margin="10" VerticalOptions="Center" Command="{Binding SignInCommand}" BackgroundColor="{x:StaticResource Green40}"/>
         </Grid>
     </ScrollView>
 </ContentPage>

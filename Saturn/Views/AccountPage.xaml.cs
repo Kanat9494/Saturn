@@ -7,6 +7,8 @@ public partial class AccountPage : ContentPage
 		InitializeComponent();
 
         versionText.Text = AppInfo.VersionString;
+
+        BindingContext = new AccountViewModel();
 	}
 
     private void OnStartServiceClicked(object sender, EventArgs e)

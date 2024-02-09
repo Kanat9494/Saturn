@@ -13,7 +13,7 @@ public partial class SignInPage : ContentPage
     {
         base.OnNavigatedTo(args);
 
-        if (AuthService.GetInstance().IsUserAuthenticated())
+        if (AuthService.IsUserAuthenticated())
         {
             await Shell.Current.GoToAsync("//MainPage");
         }
