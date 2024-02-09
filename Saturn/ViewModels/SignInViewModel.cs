@@ -9,8 +9,20 @@ internal class SignInViewModel : BaseViewModel
 
     public ICommand SignInCommand { get; }
 
+    private ulong? _userId;
+    public ulong? UserId
+    {
+        get => _userId;
+        set => SetProperty(ref _userId, value);
+    }
+
     private async Task OnSignIn()
     {
-        await AuthService.SignIn("1");
+        IsBusy = true;
+        await Task.Delay(3000);
+        if (UserId == null || UserId == 0)
+            return;
+        await AuthService.SignIn("1", UserId.ToString());
+        IsBusy = false;
     }
 }

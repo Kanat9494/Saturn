@@ -6,6 +6,8 @@ public partial class SignInPage : ContentPage
 	{
 		InitializeComponent();
 
+        activityBorder.BackgroundColor = Color.FromRgba(0, 0, 0, 150);
+
         BindingContext = new SignInViewModel();
 	}
 

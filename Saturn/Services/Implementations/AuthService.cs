@@ -30,9 +30,10 @@ internal class AuthService
         return false;
     }
 
-    protected internal static async Task SignIn(string authState)
+    protected internal static async Task SignIn(string authState, string userId)
     {
         await SecureStorage.Default.SetAsync("authState", "1");
+        await SecureStorage.Default.SetAsync("userId", userId);
 
         await Shell.Current.GoToAsync("//MainPage");
     }

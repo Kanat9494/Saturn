@@ -9,6 +9,7 @@ internal class MainViewModel : BaseViewModel
 
         Task.Run(async () =>
         {
+            _userId = await SecureStorage.Default.GetAsync("userId");
             await GenerateProducts();
         }).GetAwaiter().OnCompleted(() =>
         {
@@ -16,12 +17,16 @@ internal class MainViewModel : BaseViewModel
         });
 
         //RTServerManager.ConnectToRTCServer(1, 54);
-        ClientWSManager.ConnectToWSServer(1);
+        ClientWSManager.ConnectToWSServer(ulong.Parse(_userId ?? "0"));
         //RTServerManager.ConnectToRTCServer(1, 54);
 
     }
 
+    private string _userId;
+
     public ObservableCollection<Product> Products { get; set; }
+
+
 
     private bool _isContent;
     public bool IsContent
