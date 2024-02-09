@@ -21,8 +21,9 @@
                 </VerticalStackLayout>
             </Border>
 
-            <Border x:Name="activityBorder" Grid.RowSpan="2" IsVisible="{Binding IsBusy}" VerticalOptions="Center">
-                <ActivityIndicator IsRunning="{Binding IsBusy}"/>
+            <Border x:Name="activityBorder" Grid.RowSpan="2" IsVisible="{Binding IsBusy}" VerticalOptions="Center" HeightRequest="120" WidthRequest="120"
+                Stroke="Transparent" StrokeShape="RoundRectangle 10">
+                <ActivityIndicator IsRunning="{Binding IsBusy}" HeightRequest="50" WidthRequest="50" Color="{x:StaticResource Green40}"/>
             </Border>
         </Grid>
     </ScrollView>

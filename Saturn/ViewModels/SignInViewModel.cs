@@ -21,7 +21,11 @@ internal class SignInViewModel : BaseViewModel
         IsBusy = true;
         await Task.Delay(3000);
         if (UserId == null || UserId == 0)
+        {
+            IsBusy = false;
             return;
+
+        }
         await AuthService.SignIn("1", UserId.ToString());
         IsBusy = false;
     }
