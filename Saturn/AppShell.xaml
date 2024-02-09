@@ -23,12 +23,12 @@
             Shell.NavBarIsVisible="False"
             Icon="chats_icon.png"/>
 
-        <ShellContent
+        <!--<ShellContent
             Title="Корзина"
             ContentTemplate="{DataTemplate views:MainPage}"
             Route="ShoppingCartPage" 
             Shell.NavBarIsVisible="True"
-            Icon="shopping_cart_icon.png"/>
+            Icon="shopping_cart_icon.png"/>-->
 
         <ShellContent
             Title="Аккаунт"
