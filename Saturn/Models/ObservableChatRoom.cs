@@ -33,4 +33,5 @@ public class ObservableChatRoom : ObservableObject
         get => _hasNotRead;
         set => SetProperty(ref _hasNotRead, value);
     }
+    public string ProfileImage { get; set; } = "https://picsum.photos/id/237/200/300";
 }

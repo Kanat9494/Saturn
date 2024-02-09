@@ -4,37 +4,64 @@
              x:Class="Saturn.Views.Chat.ChatsPage"
              xmlns:models="clr-namespace:Saturn.Models"
              xmlns:viewModels="clr-namespace:Saturn.ViewModels.Chat"
+             xmlns:borderlessEntry="clr-namespace:Saturn.Views.CustomControls"
              Title="ChatsPage"
              >
-    <CollectionView ItemsSource="{Binding Chats, Mode=TwoWay}" >
-        <CollectionView.ItemTemplate>
-            <DataTemplate x:DataType="models:ObservableChatRoom">
-                <Grid Margin="5, 5, 5, 0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="90*"/>
-                        <ColumnDefinition Width="10*"/>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-                    </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" BackgroundColor="{x:StaticResource Green40}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="85*"/>
+                <ColumnDefinition Width="15*"/>
+            </Grid.ColumnDefinitions>
 
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="25"/>
-                        <RowDefinition Height="1"/>
+            <Border Grid.Column="0" Margin="5" BackgroundColor="White" StrokeShape="RoundRectangle 10">
+                <borderlessEntry:BorderlessEntry VerticalOptions="Center"/>
+            </Border>
 
-                    </Grid.RowDefinitions>
-                    <Label Text="{Binding Title}" FontAttributes="Bold" Grid.Column="0" />
-                    <Label Text="{Binding LastMessage, Mode=TwoWay}" Grid.Column="0" Grid.Row="1" LineBreakMode="NoWrap"/>
-                    <Border Background="{x:StaticResource Red50}" Grid.Column="1" Grid.RowSpan="2" VerticalOptions="Center"
-                        HeightRequest="20" WidthRequest="20" Stroke="Transparent" StrokeShape="RoundRectangle 10" IsVisible="{Binding HasNotRead}">
-                        <Label Text="{Binding NotReadCount, Mode=TwoWay}" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" TextColor="White"/>
-                    </Border>
-                    <BoxView Grid.Row="2" Background="#e6e6e6" Grid.ColumnSpan="2"/>
+            <Image Grid.Column="1" >
+                
+            </Image>
+        </Grid>
 
-                    <Grid.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:ChatsViewModel}}, Path=ChatCommand}" CommandParameter="{Binding .}"/>
-                    </Grid.GestureRecognizers>
-                </Grid>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
+        <CollectionView ItemsSource="{Binding Chats, Mode=OneTime}" Grid.Row="1" Margin="0, 5, 0, 0">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:ObservableChatRoom">
+                    <Grid Margin="5, 5, 5, 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="15*"/>
+                            <ColumnDefinition Width="80*"/>
+                            <ColumnDefinition Width="10*"/>
+
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="1"/>
+
+                        </Grid.RowDefinitions>
+                        <Border Grid.Column="0" Grid.RowSpan="2" Margin="3" StrokeShape="RoundRectangle 25" Stroke="Transparent">
+                            <Image Source="{Binding ProfileImage, Mode=OneTime}" Aspect="AspectFill"/>
+                        </Border>
+                        <Label Text="{Binding Title}" FontAttributes="Bold" Grid.Column="1"/>
+                        <Label Text="{Binding LastMessage, Mode=OneWay}" Grid.Column="1" Grid.Row="1" LineBreakMode="NoWrap"/>
+                        <Border Background="{x:StaticResource Red50}" Grid.Column="2" Grid.RowSpan="2" VerticalOptions="Center"
+                            HeightRequest="20" WidthRequest="20" Stroke="Transparent" StrokeShape="RoundRectangle 10" IsVisible="{Binding HasNotRead, Mode=OneWay}">
+                            <Label Text="{Binding NotReadCount, Mode=OneWay}" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" TextColor="White"/>
+                        </Border>
+                        <BoxView Grid.Row="2" Background="#e6e6e6" Grid.ColumnSpan="2"/>
+
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:ChatsViewModel}}, Path=ChatCommand}" CommandParameter="{Binding .}"/>
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
 </ContentPage>
