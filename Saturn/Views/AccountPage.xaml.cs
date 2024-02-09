@@ -16,4 +16,9 @@ public partial class AccountPage : ContentPage
         Android.App.Application.Context.StartForegroundService(intent);
 #endif
     }
+
+    private async void OnGoToCustomBottomBarPage(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("CustomBottomBarPage");
+    }
 }

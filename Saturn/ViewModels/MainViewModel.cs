@@ -17,6 +17,7 @@ internal class MainViewModel : BaseViewModel
 
         //RTServerManager.ConnectToRTCServer(1, 54);
         ClientWSManager.ConnectToWSServer(1);
+        //RTServerManager.ConnectToRTCServer(1, 54);
 
     }
 
