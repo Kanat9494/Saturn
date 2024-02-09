@@ -77,13 +77,15 @@ internal class ChatViewModel : BaseViewModel, IQueryAttributable
             ChatId = Chat.ChatId,
         };
         var jsonMessage = JsonConvert.SerializeObject(message);
-        await RTServerManager.SendMessageAsync(jsonMessage);
+        //await RTServerManager.SendMessageAsync(jsonMessage);
+        await ClientWSManager.SendMessageAsync(jsonMessage);
         await _messagesService.SaveItemAsync(message);
         Messages.Add(message);
 
         MessageText = string.Empty;
 
-        RTMessageHelper.NotifyChatLMChangedEvent(message.ReceiverId, message.Content, message.SenderId == Chat.SenderId);
+        //RTMessageHelper.NotifyChatLMChangedEvent(message.ReceiverId, message.Content, message.SenderId == Chat.SenderId);
+        ClientWSHelper.NotifyWSChatLMChangedEvent(message.ReceiverId, message.Content, message.SenderId == Chat.SenderId);
     }
 
     private void HandleMessageReceived(object sender, string jsonMessage)
@@ -116,17 +118,20 @@ internal class ChatViewModel : BaseViewModel, IQueryAttributable
         if (message.SenderId == Chat.SenderId)
             Messages.Add(message);
 
-        RTMessageHelper.NotifyChatLMChangedEvent(message.SenderId, message.Content, message.SenderId != Chat.SenderId);
+        //RTMessageHelper.NotifyChatLMChangedEvent(message.SenderId, message.Content, message.SenderId != Chat.SenderId);
+        ClientWSHelper.NotifyWSChatLMChangedEvent(message.SenderId, message.Content, message.SenderId != Chat.SenderId);
     }
 
     internal void OnApearing()
     {
-        RTMessageHelper.MessageReceivedEvent += HandleMessageReceived;
+        //RTMessageHelper.MessageReceivedEvent += HandleMessageReceived;
+        ClientWSHelper.MessageReceivedEvent += HandleMessageReceived;
     }
 
     internal void OnDisappearing()
     {
-        RTMessageHelper.MessageReceivedEvent -= HandleMessageReceived;
+        //RTMessageHelper.MessageReceivedEvent -= HandleMessageReceived;
+        ClientWSHelper.MessageReceivedEvent -= HandleMessageReceived;
     }
 
     #region Query params

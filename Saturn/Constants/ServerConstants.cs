@@ -7,6 +7,7 @@ internal class ServerConstants
 
     // Для эмулятора на работае
     internal const string RTC_HOST = "192.168.2.33";
+    internal const string WS_SERVER = "ws://localhost:45455/";
 
 
     // Для дома

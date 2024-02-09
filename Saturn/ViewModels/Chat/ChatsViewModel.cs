@@ -9,13 +9,11 @@ internal class ChatsViewModel : BaseViewModel
         ChatCommand = new AsyncRelayCommand<ObservableChatRoom>(OnChat);
 
         Chats = new ObservableCollection<ObservableChatRoom>();
-        RTMessageHelper.ChatLMChangedEvent += HandleChatLMChanged;
+        //RTMessageHelper.ChatLMChangedEvent += HandleChatLMChanged;
+        ClientWSHelper.ChatLMChangedEvent += HandleChatLMChanged;
         AuthFields.UserId = 1;
 
         Task.Run(InitializeChats);
-
-        //ConnectToRTCServer();
-        //RTServerManager.ConnectToRTCServer(1, 54);
     }
 
     private readonly LocalChatsService _chatsService;
@@ -232,13 +230,15 @@ internal class ChatsViewModel : BaseViewModel
 
     internal void OnAppearing()
     {
-        RTMessageHelper.MessageReceivedEvent += HandleMessageReceived;
+        //RTMessageHelper.MessageReceivedEvent += HandleMessageReceived;
+        ClientWSHelper.MessageReceivedEvent += HandleMessageReceived;
 
     }
 
     internal void OnDisappearing()
     {
-        RTMessageHelper.MessageReceivedEvent -= HandleMessageReceived;
+        //RTMessageHelper.MessageReceivedEvent -= HandleMessageReceived;
+        ClientWSHelper.MessageReceivedEvent -= HandleMessageReceived;
 
     }
 }
