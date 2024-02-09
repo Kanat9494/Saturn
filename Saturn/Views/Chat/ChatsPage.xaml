@@ -15,15 +15,15 @@
 
         <Grid Grid.Row="0" BackgroundColor="{x:StaticResource Green40}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="85*"/>
-                <ColumnDefinition Width="15*"/>
+                <ColumnDefinition Width="87*"/>
+                <ColumnDefinition Width="12*"/>
             </Grid.ColumnDefinitions>
 
             <Border Grid.Column="0" Margin="5" BackgroundColor="White" StrokeShape="RoundRectangle 10">
-                <borderlessEntry:BorderlessEntry VerticalOptions="Center"/>
+                <borderlessEntry:BorderlessEntry VerticalOptions="Center" Placeholder="Поиск чата" Margin="10, 0, 0, 0"/>
             </Border>
 
-            <Image Grid.Column="1" >
+            <Image Grid.Column="1" Source="add.png" Aspect="AspectFill" HeightRequest="30" WidthRequest="30">
                 
             </Image>
         </Grid>
