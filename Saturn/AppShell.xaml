@@ -8,6 +8,12 @@
     Shell.FlyoutBehavior="Disabled"
     Title="Saturn">
 
+    <ShellContent
+        Shell.NavBarIsVisible="False"
+        Shell.TabBarIsVisible="False"
+        ContentTemplate="{DataTemplate views:SignInPage}"
+        Route="SignInPage"/>
+
     <TabBar>
         <ShellContent
             Title="Главная"
