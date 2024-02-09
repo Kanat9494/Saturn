@@ -21,7 +21,7 @@ internal class AuthService
         string isUserAuthenticated = "";
         Task.Run(async () =>
         {
-            isUserAuthenticated = await SecureStorage.Default.GetAsync("isUserAuthenticated") ?? "0";
+            isUserAuthenticated = await SecureStorage.Default.GetAsync("authState") ?? "0";
         }).Wait();
 
         if (isUserAuthenticated.Equals("1"))

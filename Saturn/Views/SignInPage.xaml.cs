@@ -5,6 +5,8 @@ public partial class SignInPage : ContentPage
 	public SignInPage()
 	{
 		InitializeComponent();
+
+        BindingContext = new SignInViewModel();
 	}
 
     protected override async void OnNavigatedTo(NavigatedToEventArgs args)
@@ -13,7 +15,7 @@ public partial class SignInPage : ContentPage
 
         if (AuthService.GetInstance().IsUserAuthenticated())
         {
-            await Shell.Current.GoToAsync("MainPage");
+            await Shell.Current.GoToAsync("//MainPage");
         }
         
     }
