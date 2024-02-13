@@ -8,13 +8,13 @@
              >
     <ScrollView>
         <VerticalStackLayout>
-            <VerticalStackLayout HeightRequest="200" Background="White">
+            <VerticalStackLayout HeightRequest="170" Background="White">
                 <Border HeightRequest="100" WidthRequest="100" Stroke="Transparent" StrokeShape="RoundRectangle 50"
-                    VerticalOptions="Center" HorizontalOptions="Center" Margin="0, 20, 0, 0">
+                    Margin="0, 20, 0, 0">
                     <Image Source="{Binding CurrentUser.ProfileImageSource}" Aspect="AspectFill"/>
                 </Border>
 
-                <Label Text="{Binding CurrentUser.UserName}" VerticalOptions="Center" HorizontalOptions="Center" Margin="0, 20, 0, 0"
+                <Label Text="{Binding CurrentUser.UserName}" HorizontalOptions="Center" Margin="0, 20, 0, 0"
                     FontSize="16" FontAttributes="Bold"/>
 
             </VerticalStackLayout>
