@@ -15,10 +15,9 @@ internal class MainViewModel : BaseViewModel
         }).GetAwaiter().OnCompleted(() =>
         {
             IsBusy = false;
+            ClientWSManager.ConnectToWSServer(ulong.Parse(_userId ?? "0"));
         });
 
-        //RTServerManager.ConnectToRTCServer(1, 54);
-        ClientWSManager.ConnectToWSServer(ulong.Parse(_userId ?? "0"));
         //RTServerManager.ConnectToRTCServer(1, 54);
 
     }
