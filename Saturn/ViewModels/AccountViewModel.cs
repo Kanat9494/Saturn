@@ -4,11 +4,7 @@ internal class AccountViewModel : BaseViewModel
 {
     public AccountViewModel()
     {
-        Task.Run(async () =>
-        {
-            await Task.Delay(2000);
-            InitializeUserAsync();
-        });
+        Task.Run(InitializeUserAsync);
         SignOutCommand = new AsyncRelayCommand(OnSignOut);
     }
 
