@@ -27,7 +27,7 @@
 		<ApplicationId>com.companyname.saturn</ApplicationId>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>1.0.23</ApplicationDisplayVersion>
+		<ApplicationDisplayVersion>1.0.24</ApplicationDisplayVersion>
 		<ApplicationVersion>1</ApplicationVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
@@ -58,6 +58,8 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Images\add.png" />
+	  <None Remove="Resources\Images\heart.png" />
+	  <None Remove="Resources\Images\send.png" />
 	</ItemGroup>
 
 	<ItemGroup>

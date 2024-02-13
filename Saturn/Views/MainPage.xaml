@@ -71,10 +71,10 @@
             <CollectionView ItemsSource="{Binding Blogs}" Grid.Row="2" BackgroundColor="{x:StaticResource White78}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:BlogPost">
-                        <Grid HeightRequest="400" Background="White" Margin="0, 0, 0, 10">
+                        <Grid Background="White" Margin="0, 0, 0, 10">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="40"/>
-                                <RowDefinition Height="300"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="70"/>
                             </Grid.RowDefinitions>
 
@@ -87,9 +87,9 @@
                                     <ColumnDefinition Width="20*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Text="Нравится" VerticalOptions="Center"/>
-                                <Label Text="Комментарии" VerticalOptions="Center" Grid.Column="1" HorizontalOptions="Center"/>
-                                <Label Grid.Column="2" Text="Поделиться" VerticalOptions="Center"/>
+                                <Image Source="heart.png" VerticalOptions="Center" HeightRequest="30" WidthRequest="30"/>
+                                <Label Text="Комментарии" VerticalOptions="Center" Grid.Column="1" HorizontalOptions="Center" FontFamily="OpenSansSemibold"/>
+                                <Image Grid.Column="2" Source="send.png" VerticalOptions="Center" WidthRequest="30" HeightRequest="30"/>
                             </Grid>
                         </Grid>
                     </DataTemplate>
