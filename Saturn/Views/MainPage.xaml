@@ -80,10 +80,17 @@
 
                             <Label Grid.Row="0" Text="{Binding Title}" Margin="10, 10, 10, 0" FontSize="19" FontAttributes="Bold" FontFamily="OpenSansSemibold"/>
                             <Label Grid.Row="1" Text="{Binding Content}" Margin="10, 10, 10, 0" MaxLines="9"/>
-                            <HorizontalStackLayout Grid.Row="2">
-                                <Label Text="Нравится" VerticalOptions="Center" HorizontalOptions="Center"/>
-                                <!--<Label Text="Комментарии" VerticalOptions="Center" HorizontalOptions="Center"/>-->
-                            </HorizontalStackLayout>
+                            <Grid Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="20*"/>
+                                    <ColumnDefinition Width="60*"/>
+                                    <ColumnDefinition Width="20*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="Нравится" VerticalOptions="Center"/>
+                                <Label Text="Комментарии" VerticalOptions="Center" Grid.Column="1" HorizontalOptions="Center"/>
+                                <Label Grid.Column="2" Text="Поделиться" VerticalOptions="Center"/>
+                            </Grid>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
