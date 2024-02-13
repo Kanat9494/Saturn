@@ -58,10 +58,14 @@ internal class MainViewModel : BaseViewModel
     internal async Task InitializeBlogs()
     {
         await Task.Delay(3000);
-        for (int i = 1; i <= 50; i++)
+        for (int i = 1; i <= 300; i++)
         {
-            Blogs.Add(new BlogPost(i, "Lorem Ipsum asdf;lasdf", "https://picsum.photos/id/237/200/300", $"https://picsum.photos/id/{i}/200/300",
-                "asdfl asdlfk Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's st"));
+            if (i % 2 == 0)
+                Blogs.Add(new BlogPost(i, "Lorem Ipsum asdf;lasdf", "https://picsum.photos/id/237/200/300", $"https://picsum.photos/id/{i}/200/300",
+                    "Lasdfl asdlfk Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's st"));
+            else
+                Blogs.Add(new BlogPost(i, "Lorem Ipsum asdf;lasdf", "https://picsum.photos/id/237/200/300", $"https://picsum.photos/id/{i}/200/300",
+                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker includ"));
         }
 
         IsBusy = false;

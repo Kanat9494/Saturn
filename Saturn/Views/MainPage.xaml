@@ -68,7 +68,7 @@
             <!--<CollectionView ItemsSource="{Binding Products}" Grid.Row="2" ItemTemplate="{x:StaticResource productTemplate}">
                 
             </CollectionView>-->
-            <CollectionView ItemsSource="{Binding Blogs}" Grid.Row="2" BackgroundColor="{x:StaticResource White78}">
+            <CollectionView ItemsSource="{Binding Blogs}" Grid.Row="2" BackgroundColor="{x:StaticResource White78}" IsVisible="{Binding IsContent}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:BlogPost">
                         <Grid Background="White" Margin="0, 0, 0, 10">
@@ -89,7 +89,7 @@
 
                                 <Image Source="heart.png" VerticalOptions="Center" HeightRequest="30" WidthRequest="30"/>
                                 <Label Text="Комментарии" VerticalOptions="Center" Grid.Column="1" HorizontalOptions="Center" FontFamily="OpenSansSemibold"/>
-                                <Image Grid.Column="2" Source="send.png" VerticalOptions="Center" WidthRequest="30" HeightRequest="30"/>
+                                <Image Grid.Column="2" Source="send_icon.png" VerticalOptions="Center" WidthRequest="30" HeightRequest="30"/>
                             </Grid>
                         </Grid>
                     </DataTemplate>
