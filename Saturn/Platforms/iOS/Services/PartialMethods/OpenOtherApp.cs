@@ -1,8 +1,8 @@
 ﻿namespace Saturn.Services.PartialMethods;
 
-public partial class OpenOtherApp
+public class OpenOtherApp3
 {
-    public partial void LaunchApp(string packageName)
+    public void LaunchApp(string packageName)
     {
     }
 }

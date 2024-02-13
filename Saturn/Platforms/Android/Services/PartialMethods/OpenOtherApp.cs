@@ -3,9 +3,9 @@ using Android.Content.PM;
 
 namespace Saturn.Services.PartialMethods;
 
-public partial class OpenOtherApp
+public class OpenOtherApp2
 {
-    public partial void LaunchApp(string packageName)
+    public void LaunchApp(string packageName)
     {
         PackageManager? pm = Platform.AppContext.PackageManager;
 
