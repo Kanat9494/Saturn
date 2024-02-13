@@ -87,9 +87,9 @@
                                     <ColumnDefinition Width="20*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Image Source="heart.png" VerticalOptions="Center" HeightRequest="30" WidthRequest="30"/>
+                                <Image Source="heart.png" VerticalOptions="Center" HeightRequest="25" WidthRequest="25"/>
                                 <Label Text="Комментарии" VerticalOptions="Center" Grid.Column="1" HorizontalOptions="Center" FontFamily="OpenSansSemibold"/>
-                                <Image Grid.Column="2" Source="send_icon.png" VerticalOptions="Center" WidthRequest="30" HeightRequest="30"/>
+                                <Image Grid.Column="2" Source="send_icon.png" VerticalOptions="Center" WidthRequest="25" HeightRequest="25"/>
                             </Grid>
                         </Grid>
                     </DataTemplate>
