@@ -65,8 +65,28 @@
                 <borderlessEntry:BorderlessEntry Margin="10, 5, 0, 0" Placeholder="Поиск"/>
             </Border>
 
-            <CollectionView ItemsSource="{Binding Products}" Grid.Row="2" ItemTemplate="{x:StaticResource productTemplate}">
+            <!--<CollectionView ItemsSource="{Binding Products}" Grid.Row="2" ItemTemplate="{x:StaticResource productTemplate}">
                 
+            </CollectionView>-->
+            <CollectionView ItemsSource="{Binding Blogs}" Grid.Row="2" BackgroundColor="{x:StaticResource White78}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:BlogPost">
+                        <Grid HeightRequest="400" Background="White" Margin="0, 0, 0, 10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="300"/>
+                                <RowDefinition Height="70"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="{Binding Title}" Margin="10, 10, 10, 0" FontSize="19" FontAttributes="Bold" FontFamily="OpenSansSemibold"/>
+                            <Label Grid.Row="1" Text="{Binding Content}" Margin="10, 10, 10, 0" MaxLines="9"/>
+                            <HorizontalStackLayout Grid.Row="2">
+                                <Label Text="Нравится" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                <!--<Label Text="Комментарии" VerticalOptions="Center" HorizontalOptions="Center"/>-->
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
             </CollectionView>
         </Grid>
     </RefreshView>

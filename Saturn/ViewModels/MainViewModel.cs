@@ -5,12 +5,13 @@ internal class MainViewModel : BaseViewModel
     public MainViewModel()
     {
         Products = new ObservableCollection<Product>();
+        Blogs = new ObservableCollection<BlogPost>();
         IsBusy = true;
 
         Task.Run(async () =>
         {
             _userId = await SecureStorage.Default.GetAsync("userId");
-            await GenerateProducts();
+            await InitializeBlogs();
         }).GetAwaiter().OnCompleted(() =>
         {
             IsBusy = false;
@@ -25,6 +26,7 @@ internal class MainViewModel : BaseViewModel
     private string _userId;
 
     public ObservableCollection<Product> Products { get; set; }
+    public ObservableCollection<BlogPost> Blogs { get; set; }
 
 
 
@@ -49,6 +51,19 @@ internal class MainViewModel : BaseViewModel
                 Price = 500.0
             });
         }
+        IsBusy = false;
+        IsContent = true;
+    }
+
+    internal async Task InitializeBlogs()
+    {
+        await Task.Delay(3000);
+        for (int i = 1; i <= 50; i++)
+        {
+            Blogs.Add(new BlogPost(i, "Lorem Ipsum asdf;lasdf", "https://picsum.photos/id/237/200/300", $"https://picsum.photos/id/{i}/200/300",
+                "asdfl asdlfk Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's st"));
+        }
+
         IsBusy = false;
         IsContent = true;
     }
