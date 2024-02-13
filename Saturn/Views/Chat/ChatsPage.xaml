@@ -25,7 +25,9 @@
 
             <Image Grid.Column="1" Source="add.png" Aspect="AspectFill" HeightRequest="30" WidthRequest="30"
                 HorizontalOptions="Center">
-                
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NewChatRoomCommand}"/>
+                </Image.GestureRecognizers>
             </Image>
         </Grid>
 

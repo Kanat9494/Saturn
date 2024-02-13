@@ -7,6 +7,7 @@ internal class ChatsViewModel : BaseViewModel
         _chatsService = chatsService;
         _messagesService = messagesService;
         ChatCommand = new AsyncRelayCommand<ObservableChatRoom>(OnChat);
+        NewChatRoomCommand = new AsyncRelayCommand(OnNewChatRoom);
 
         Chats = new ObservableCollection<ObservableChatRoom>();
         //RTMessageHelper.ChatLMChangedEvent += HandleChatLMChanged;
@@ -26,7 +27,8 @@ internal class ChatsViewModel : BaseViewModel
 
     private string _title;
 
-    public ICommand ChatCommand { get; set; }
+    public ICommand ChatCommand { get; }
+    public ICommand NewChatRoomCommand { get; }
 
     ObservableChatRoom observableChat;
     ChatRoom chat;
@@ -149,6 +151,7 @@ internal class ChatsViewModel : BaseViewModel
         await Shell.Current.GoToAsync("ChatPage", navigationParameter);
     }
 
+    #region app lifecycle
     internal void OnAppearing()
     {
         //RTMessageHelper.MessageReceivedEvent += HandleMessageReceived;
@@ -161,5 +164,28 @@ internal class ChatsViewModel : BaseViewModel
         //RTMessageHelper.MessageReceivedEvent -= HandleMessageReceived;
         ClientWSHelper.MessageReceivedEvent -= HandleMessageReceived;
 
+    }
+    #endregion
+
+    private async Task OnNewChatRoom()
+    {
+        string result = await Shell.Current.DisplayPromptAsync("Новый чат", "Кому вы хотите отправить сообщение", keyboard: Keyboard.Numeric);
+
+        if (string.IsNullOrWhiteSpace(result))
+            return;
+
+        chat = new ChatRoom
+        {
+            Title = $"Aika {result}",
+            SenderId = int.Parse(result),
+            LastMessage = "",
+            NotReadCount = 0,
+            HasNotRead = false
+        };
+
+        await _chatsService.SaveItemAsync(chat);
+        int chatId = await _chatsService.HasUserChat(chat.SenderId);
+        Chats.Add(new ObservableChatRoom(chat));
+        await OnChat(new ObservableChatRoom(chat));
     }
 }

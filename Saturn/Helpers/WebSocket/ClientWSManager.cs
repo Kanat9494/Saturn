@@ -1,4 +1,6 @@
-﻿namespace Saturn.Helpers.WebSocket;
+﻿using System.Net.WebSockets;
+
+namespace Saturn.Helpers.WebSocket;
 
 internal class ClientWSManager
 {
@@ -60,7 +62,14 @@ internal class ClientWSManager
 
     internal static async Task SendMessageAsync(string jsonMessage)
     {
-        byte[] data = Encoding.UTF8.GetBytes(jsonMessage);
-        await _clientWS.SendAsync(new ArraySegment<byte>(data, 0, data.Length), WebSocketMessageType.Text, true, CancellationToken.None);
+        try
+        {
+            byte[] data = Encoding.UTF8.GetBytes(jsonMessage);
+            await _clientWS.SendAsync(new ArraySegment<byte>(data, 0, data.Length), WebSocketMessageType.Text, true, CancellationToken.None);
+        }
+        catch (Exception ex)
+        {
+
+        }
     }
 }
