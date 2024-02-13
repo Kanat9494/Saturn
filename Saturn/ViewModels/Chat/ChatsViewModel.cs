@@ -12,7 +12,6 @@ internal class ChatsViewModel : BaseViewModel
         Chats = new ObservableCollection<ObservableChatRoom>();
         //RTMessageHelper.ChatLMChangedEvent += HandleChatLMChanged;
         ClientWSHelper.ChatLMChangedEvent += HandleChatLMChanged;
-        AuthFields.UserId = 1;
 
         Task.Run(InitializeChats);
     }

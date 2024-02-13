@@ -19,7 +19,7 @@ internal class ClientWSManager
 
             Task.Run(async () =>
             {
-                await ReceiveMessage(_userId);
+                await ReceiveMessage();
             });
         }
         catch (Exception ex)
@@ -28,11 +28,11 @@ internal class ClientWSManager
         }
     }
 
-    internal static async Task ReceiveMessage(ulong userId)
+    internal static async Task ReceiveMessage()
     {
         try
         {
-            await _clientWS.ConnectAsync(new Uri(_uri + userId), CancellationToken.None);
+            await _clientWS.ConnectAsync(new Uri(_uri + _userId), CancellationToken.None);
             byte[] data = new byte[1024 * 4];
 
             StringBuilder messageBuilder = new StringBuilder();

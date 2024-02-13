@@ -16,6 +16,7 @@ internal class MainViewModel : BaseViewModel
         {
             IsBusy = false;
             ClientWSManager.ConnectToWSServer(ulong.Parse(_userId ?? "0"));
+            AuthFields.UserId = int.Parse(_userId ?? "0");
         });
 
         //RTServerManager.ConnectToRTCServer(1, 54);
