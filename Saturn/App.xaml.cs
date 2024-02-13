@@ -1,4 +1,6 @@
-﻿using Microsoft.Maui.Controls.Compatibility.Platform.Android;
+﻿#if ANDROID
+using Microsoft.Maui.Controls.Compatibility.Platform.Android;
+#endif
 
 namespace Saturn
 {

@@ -127,7 +127,7 @@ public partial class MainPage : ContentPage
                     grid.Add(label4, 1, 3);
                     border.Content = grid;
                 }
-                else if (_viewModel.Products.Any(p => p.ProductId % 3 == 0))
+                else if (_viewModel.Products.Any(p => p.ProductId % 4 == 0))
                 {
                     Grid grid = new Grid()
                     {
