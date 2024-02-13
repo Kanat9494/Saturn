@@ -32,7 +32,7 @@ internal class AuthService
 
     protected internal static async Task SignIn(string authState, string userId)
     {
-        await SecureStorage.Default.SetAsync("authState", "1");
+        await SecureStorage.Default.SetAsync("authState", authState);
         await SecureStorage.Default.SetAsync("userId", userId);
 
         await Shell.Current.GoToAsync("//MainPage");
@@ -40,7 +40,7 @@ internal class AuthService
 
     protected internal static async Task SignOut(string authState)
     {
-        await SecureStorage.Default.SetAsync("authState", "0");
+        await SecureStorage.Default.SetAsync("authState", authState);
 
         await Shell.Current.GoToAsync("//SignInPage");
     }
