@@ -107,7 +107,7 @@ internal class ChatViewModel : BaseViewModel, IQueryAttributable
         var message = JsonConvert.DeserializeObject<Message>(jsonMessage);
 
         int chatId;
-        if (message.SenderId != Chat.SenderId)
+        if (message.ReceiverId != _userId)
             chatId = await _chatsService.HasUserChat(message.SenderId);
         else
             chatId = Chat.ChatId;
@@ -115,7 +115,7 @@ internal class ChatViewModel : BaseViewModel, IQueryAttributable
         message.ChatId = chatId;
        
         await _messagesService.SaveItemAsync(message);
-        if (message.SenderId == Chat.SenderId)
+        if (message.ReceiverId == _userId)
             Messages.Add(message);
 
         //RTMessageHelper.NotifyChatLMChangedEvent(message.SenderId, message.Content, message.SenderId != Chat.SenderId);

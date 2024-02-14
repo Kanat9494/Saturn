@@ -65,6 +65,11 @@ internal class ChatsViewModel : BaseViewModel
             Chats[i].HasNotRead = true;
             Chats[i].NotReadCount++;
         }
+
+        Task.Run(async () =>
+        {
+            await _chatsService.UpdateLastMessageAsync(chatId, lastMessage);
+        });
     }
 
     private async Task HasUserChat(string json)
