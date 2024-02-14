@@ -166,7 +166,7 @@ internal class ChatsViewModel : BaseViewModel
     internal void OnDisappearing()
     {
         //RTMessageHelper.MessageReceivedEvent -= HandleMessageReceived;
-        ClientWSHelper.MessageReceivedEvent -= HandleMessageReceived;
+        //ClientWSHelper.MessageReceivedEvent -= HandleMessageReceived;
 
     }
     #endregion
