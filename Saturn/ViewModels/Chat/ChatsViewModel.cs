@@ -10,9 +10,7 @@ internal class ChatsViewModel : BaseViewModel
         NewChatRoomCommand = new AsyncRelayCommand(OnNewChatRoom);
 
         Chats = new ObservableCollection<ObservableChatRoom>();
-        //RTMessageHelper.ChatLMChangedEvent += HandleChatLMChanged;
         ClientWSHelper.ChatLMChangedEvent += HandleChatLMChanged;
-        ClientWSHelper.MessageReceivedEvent += HandleMessageReceived;
 
 
         Task.Run(InitializeChats);
@@ -163,14 +161,14 @@ internal class ChatsViewModel : BaseViewModel
     internal void OnAppearing()
     {
         //RTMessageHelper.MessageReceivedEvent += HandleMessageReceived;
-       // ClientWSHelper.MessageReceivedEvent += HandleMessageReceived;
+        ClientWSHelper.MessageReceivedEvent += HandleMessageReceived;
 
     }
 
     internal void OnDisappearing()
     {
         //RTMessageHelper.MessageReceivedEvent -= HandleMessageReceived;
-        //ClientWSHelper.MessageReceivedEvent -= HandleMessageReceived;
+        ClientWSHelper.MessageReceivedEvent -= HandleMessageReceived;
 
     }
     #endregion
