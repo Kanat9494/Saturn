@@ -41,7 +41,7 @@ public class DeepJobService : JobService
                 var notification = new NotificationCompat.Builder(this, CHANNEL_ID);
                 notification.SetAutoCancel(false);
                 notification.SetOngoing(true);
-                //notification.SetSmallIcon(Resource.Mipmap.appicon);
+                notification.SetSmallIcon(Resource.Mipmap.appicon);
                 notification.SetContentTitle("ForegroundService");
                 notification.SetContentText($"Прошло {i * 5} секунд");
 

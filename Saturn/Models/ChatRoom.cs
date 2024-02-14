@@ -6,6 +6,7 @@ public class ChatRoom
     public int ChatId { get; set; }
     public string? Title { get; set; }
     public int SenderId { get; set; }
+    public int ReceiverId { get; set; }
     public string? LastMessage { get; set; }
     public int NotReadCount { get; set; } = 0;
     public bool HasNotRead { get; set; } = false;

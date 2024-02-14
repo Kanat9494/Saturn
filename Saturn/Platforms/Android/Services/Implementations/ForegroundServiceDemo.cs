@@ -23,7 +23,7 @@ public class ForegroundServiceDemo : Service
         var notification = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
         notification.SetAutoCancel(false);
         notification.SetOngoing(true);
-        //notification.SetSmallIcon(Resource.Mipmap.appicon);
+        notification.SetSmallIcon(Resource.Mipmap.appicon);
         notification.SetContentTitle("ForegroundService");
         notification.SetContentText("Foreground Service is running");
 

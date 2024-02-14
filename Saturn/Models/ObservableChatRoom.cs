@@ -10,6 +10,7 @@ public class ObservableChatRoom : ObservableObject
         LastMessage = chat.LastMessage;
         NotReadCount = chat.NotReadCount;
         HasNotRead = chat.HasNotRead;
+        ReceiverId = chat.ReceiverId;
     }
 
     public int ChatId { get; set; }
@@ -34,4 +35,5 @@ public class ObservableChatRoom : ObservableObject
         set => SetProperty(ref _hasNotRead, value);
     }
     public string ProfileImage { get; set; } = "https://picsum.photos/id/237/200/300";
+    public int ReceiverId { get; set; }
 }
