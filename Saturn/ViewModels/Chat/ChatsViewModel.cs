@@ -176,7 +176,8 @@ internal class ChatsViewModel : BaseViewModel
         chat = new ChatRoom
         {
             Title = $"Aika {result}",
-            SenderId = int.Parse(result),
+            SenderId = AuthFields.UserId,
+            ReceiverId = int.Parse(result),
             LastMessage = "",
             NotReadCount = 0,
             HasNotRead = false

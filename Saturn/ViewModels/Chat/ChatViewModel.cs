@@ -12,7 +12,7 @@ internal class ChatViewModel : BaseViewModel, IQueryAttributable
 
         SendCommand = new AsyncRelayCommand(OnSend);
 
-        _userId = 1;
+        _userId = AuthFields.UserId;
     }
 
     private readonly LocalMessagesService _messagesService;
