@@ -55,9 +55,9 @@ internal class ChatsViewModel : BaseViewModel
         });
     }
 
-    private void HandleChatLMChanged(object sender, int userId, string lastMessage, bool isOtherChat)
+    private void HandleChatLMChanged(object sender, int chatId, string lastMessage, bool isOtherChat)
     {
-        observableChat = Chats.FirstOrDefault(c => c.SenderId == userId);
+        observableChat = Chats.FirstOrDefault(c => c.ChatId == chatId);
         int i = Chats.IndexOf(observableChat);
         Chats[i].LastMessage = lastMessage;
         if (isOtherChat)

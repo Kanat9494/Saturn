@@ -70,7 +70,7 @@ internal class ChatViewModel : BaseViewModel, IQueryAttributable
 
         var message = new Message
         {
-            ReceiverId = Chat.SenderId,
+            ReceiverId = Chat.ReceiverId,
             SenderId = _userId,
             Content = MessageText,
             SentDate = DateTime.Now,
@@ -85,7 +85,7 @@ internal class ChatViewModel : BaseViewModel, IQueryAttributable
         MessageText = string.Empty;
 
         //RTMessageHelper.NotifyChatLMChangedEvent(message.ReceiverId, message.Content, message.SenderId == Chat.SenderId);
-        ClientWSHelper.NotifyWSChatLMChangedEvent(message.ReceiverId, message.Content, message.SenderId == Chat.SenderId);
+        ClientWSHelper.NotifyWSChatLMChangedEvent(Chat.ChatId, message.Content, message.SenderId == Chat.ReceiverId);
     }
 
     private void HandleMessageReceived(object sender, string jsonMessage)
@@ -119,7 +119,7 @@ internal class ChatViewModel : BaseViewModel, IQueryAttributable
             Messages.Add(message);
 
         //RTMessageHelper.NotifyChatLMChangedEvent(message.SenderId, message.Content, message.SenderId != Chat.SenderId);
-        ClientWSHelper.NotifyWSChatLMChangedEvent(message.SenderId, message.Content, message.SenderId != Chat.SenderId);
+        ClientWSHelper.NotifyWSChatLMChangedEvent(message.SenderId, message.Content, message.SenderId == Chat.SenderId);
     }
 
     internal void OnApearing()
