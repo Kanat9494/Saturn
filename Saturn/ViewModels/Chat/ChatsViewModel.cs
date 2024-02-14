@@ -11,6 +11,9 @@ internal class ChatsViewModel : BaseViewModel
 
         Chats = new ObservableCollection<ObservableChatRoom>();
         //RTMessageHelper.ChatLMChangedEvent += HandleChatLMChanged;
+        ClientWSHelper.ChatLMChangedEvent += HandleChatLMChanged;
+        ClientWSHelper.MessageReceivedEvent += HandleMessageReceived;
+
 
         Task.Run(InitializeChats);
     }
@@ -87,6 +90,7 @@ internal class ChatsViewModel : BaseViewModel
                 chat.SenderId = message.SenderId;
                 chat.LastMessage = message.Content;
                 chat.NotReadCount++;
+                chat.ReceiverId = message.ReceiverId;
                 chat.HasNotRead = true;
                 await _chatsService.SaveItemAsync(chat);
                 chatId = chat.ChatId;
@@ -159,7 +163,7 @@ internal class ChatsViewModel : BaseViewModel
     internal void OnAppearing()
     {
         //RTMessageHelper.MessageReceivedEvent += HandleMessageReceived;
-        ClientWSHelper.MessageReceivedEvent += HandleMessageReceived;
+       // ClientWSHelper.MessageReceivedEvent += HandleMessageReceived;
 
     }
 
