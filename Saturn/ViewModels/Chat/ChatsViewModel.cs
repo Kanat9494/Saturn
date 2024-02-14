@@ -118,15 +118,14 @@ internal class ChatsViewModel : BaseViewModel
                 };
                 _title = chat.Title;
                 await _chatsService.SaveItemAsync(chat);
-                chatId = await _chatsService.HasUserChat(message.SenderId);
-                await CreateLocalMessage(chatId, message);
+                await CreateLocalMessage(chat.ChatId, message);
 
 
-                if (!Chats.Any(c => c.ChatId == chatId))
+                if (!Chats.Any(c => c.ChatId == chat.ChatId))
                     Chats.Add(new ObservableChatRoom(chat));
                 else
                 {
-                    observableChat = Chats.FirstOrDefault(c => c.ChatId == chatId);
+                    observableChat = Chats.FirstOrDefault(c => c.ChatId == chat.ChatId);
                     int i = Chats.IndexOf(observableChat);
                     Chats[i].LastMessage = message.Content;
                     Chats[i].HasNotRead = true;
@@ -183,15 +182,14 @@ internal class ChatsViewModel : BaseViewModel
         chat = new ChatRoom
         {
             Title = $"Aika {result}",
-            SenderId = AuthFields.UserId,
-            ReceiverId = int.Parse(result),
+            SenderId = int.Parse(result),
+            ReceiverId = AuthFields.UserId,
             LastMessage = "",
             NotReadCount = 0,
             HasNotRead = false
         };
 
         await _chatsService.SaveItemAsync(chat);
-        int chatId = await _chatsService.HasUserChat(chat.SenderId);
         Chats.Add(new ObservableChatRoom(chat));
         await OnChat(new ObservableChatRoom(chat));
     }

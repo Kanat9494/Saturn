@@ -60,7 +60,7 @@ public class LocalChatsService
     public async Task<int> HasUserChat(int userId)
     {
         await Init();
-        var existingChat = await Database.Table<ChatRoom>().FirstOrDefaultAsync(c => c.SenderId == userId || c.ReceiverId == userId);
+        var existingChat = await Database.Table<ChatRoom>().FirstOrDefaultAsync(c => c.SenderId == userId);
 
         if (existingChat != null)
             return existingChat.ChatId;
