@@ -11,7 +11,6 @@ internal class ChatsViewModel : BaseViewModel
 
         Chats = new ObservableCollection<ObservableChatRoom>();
         //RTMessageHelper.ChatLMChangedEvent += HandleChatLMChanged;
-        ClientWSHelper.ChatLMChangedEvent += HandleChatLMChanged;
 
         Task.Run(InitializeChats);
     }
@@ -112,7 +111,8 @@ internal class ChatsViewModel : BaseViewModel
                     SenderId = message.SenderId,
                     LastMessage = message.Content,
                     NotReadCount = 1,
-                    HasNotRead = true
+                    HasNotRead = true,
+                    ReceiverId = message.ReceiverId
                 };
                 _title = chat.Title;
                 await _chatsService.SaveItemAsync(chat);
