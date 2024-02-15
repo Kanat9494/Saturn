@@ -39,17 +39,29 @@ public class LocalChatsService
             return await Database.InsertAsync(chat);
     }
 
-    public async Task<int> UpdateLastMessageAsync(int chatId, string message)
+    public async Task<ChatRoom> UpdateLastMessageAsync(int chatId, string message, int senderId, int receiverId)
     {
         await Init();
         var chat = await Database.Table<ChatRoom>().FirstOrDefaultAsync(c => c.ChatId == chatId);
         if (chat != null)
         {
+            chat.ReceiverId = receiverId;
             chat.LastMessage = message;
             await Database.UpdateAsync(chat);
-            return chat.ChatId;
+            return chat;
         }
-        return 0;
+        chat = new ChatRoom
+        {
+            Title = chatId.ToString(),
+            SenderId = senderId,
+            ReceiverId = receiverId,
+            LastMessage = message,
+            HasNotRead = true,
+            NotReadCount = 1,
+        };
+        await SaveItemAsync(chat);
+
+        return chat;
     }
 
     public async Task<int> DeleteItemAsync(ChatRoom chat)

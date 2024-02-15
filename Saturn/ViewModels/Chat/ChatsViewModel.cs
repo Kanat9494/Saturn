@@ -55,7 +55,7 @@ internal class ChatsViewModel : BaseViewModel
         });
     }
 
-    private void HandleChatLMChanged(object sender, int chatId, string lastMessage, bool isOtherChat)
+    private void HandleChatLMChanged(object sender, int chatId, string lastMessage, bool isOtherChat, int senderId, int receiverId)
     {
         observableChat = Chats.FirstOrDefault(c => c.ChatId == chatId);
         int i = Chats.IndexOf(observableChat);
@@ -70,7 +70,7 @@ internal class ChatsViewModel : BaseViewModel
 
         Task.Run(async () =>
         {
-            var id = await _chatsService.UpdateLastMessageAsync(chatId, lastMessage);
+            var id = await _chatsService.UpdateLastMessageAsync(chatId, lastMessage, senderId, receiverId);
 
             if (isOtherChat)
             {

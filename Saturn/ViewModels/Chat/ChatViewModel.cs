@@ -85,7 +85,7 @@ internal class ChatViewModel : BaseViewModel, IQueryAttributable
         MessageText = string.Empty;
 
         //RTMessageHelper.NotifyChatLMChangedEvent(message.ReceiverId, message.Content, message.SenderId == Chat.SenderId);
-        ClientWSHelper.NotifyWSChatLMChangedEvent(Chat.ChatId, message.Content, message.SenderId == Chat.SenderId);
+        ClientWSHelper.NotifyWSChatLMChangedEvent(Chat.ChatId, message.Content, message.SenderId == Chat.SenderId, message.ReceiverId, _userId);
     }
 
     private void HandleMessageReceived(object sender, string jsonMessage)
@@ -120,7 +120,7 @@ internal class ChatViewModel : BaseViewModel, IQueryAttributable
             Messages.Add(message);
 
         //RTMessageHelper.NotifyChatLMChangedEvent(message.SenderId, message.Content, message.SenderId != Chat.SenderId);
-        ClientWSHelper.NotifyWSChatLMChangedEvent(message.ChatId ?? 0, message.Content, message.SenderId != Chat.SenderId);
+        ClientWSHelper.NotifyWSChatLMChangedEvent(message.ChatId ?? 0, message.Content, message.SenderId != Chat.SenderId, message.SenderId, _userId);
     }
 
     internal void OnApearing()

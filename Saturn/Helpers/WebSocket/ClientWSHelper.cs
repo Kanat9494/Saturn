@@ -1,7 +1,7 @@
 ﻿namespace Saturn.Helpers.WebSocket;
 
 internal delegate void WSMessageReceivedEventHandler(object sender, string jsonMessage);
-internal delegate void WSChatLMChangedEventHandler(object sender, int userId, string lastMessage, bool isOtherChat);
+internal delegate void WSChatLMChangedEventHandler(object sender, int chatId, string lastMessage, bool isOtherChat, int senderId, int receiverId);
 
 internal static class ClientWSHelper
 {
@@ -13,8 +13,8 @@ internal static class ClientWSHelper
         MessageReceivedEvent?.Invoke(null, jsonMessage);
     }
 
-    internal static void NotifyWSChatLMChangedEvent(int userId, string lastMessage, bool isOtherChat)
+    internal static void NotifyWSChatLMChangedEvent(int chatId, string lastMessage, bool isOtherChat, int senderId, int receiverId)
     {
-        ChatLMChangedEvent?.Invoke(null, userId, lastMessage, isOtherChat);
+        ChatLMChangedEvent?.Invoke(null, chatId, lastMessage, isOtherChat, senderId, receiverId);
     }
 }
