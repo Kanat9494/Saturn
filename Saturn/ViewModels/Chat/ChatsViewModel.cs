@@ -70,11 +70,11 @@ internal class ChatsViewModel : BaseViewModel
 
         Task.Run(async () =>
         {
-            var id = await _chatsService.UpdateLastMessageAsync(chatId, lastMessage, senderId, receiverId);
+            var chat = await _chatsService.UpdateLastMessageAsync(chatId, lastMessage, senderId, receiverId);
 
-            if (isOtherChat)
+            if (observableChat == null)
             {
-
+                Chats.Add(new ObservableChatRoom(chat));
             }
         });
     }
