@@ -20,9 +20,17 @@ namespace Saturn
             base.OnCreate(savedInstanceState);
 
             var url = Intent?.DataString;
-            if (!string.IsNullOrWhiteSpace(url))
+            Intent? intent = this.Intent;
+            var action = intent?.Action;
+            //if (!string.IsNullOrWhiteSpace(url))
+            //{
+            //    Microsoft.Maui.Controls.Application.Current.SendOnAppLinkRequestReceived(new Uri(url));
+
+            //}
+            if (Intent.ActionView == action && !string.IsNullOrWhiteSpace(url))
             {
-                Microsoft.Maui.Controls.Application.Current.SendOnAppLinkRequestReceived(new Uri(url));
+                var id = url.Split('/')[4];
+                Shell.Current.GoToAsync("DetailsPage");
             }
 
             //try
