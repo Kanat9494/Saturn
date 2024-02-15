@@ -52,7 +52,7 @@ public class LocalChatsService
         }
         chat = new ChatRoom
         {
-            Title = chatId.ToString(),
+            Title = senderId.ToString(),
             SenderId = senderId,
             ReceiverId = receiverId,
             LastMessage = message,
