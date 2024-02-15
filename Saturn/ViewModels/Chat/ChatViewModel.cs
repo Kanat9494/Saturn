@@ -96,12 +96,6 @@ internal class ChatViewModel : BaseViewModel, IQueryAttributable
         });
     }
 
-    async Task CreateLocalMessage(Message message)
-    {
-        await _messagesService.SaveItemAsync(message);
-        Debug.WriteLine(message.MessageId + "  " + message.ChatId + " userId: " + message.ReceiverId);
-    }
-
     async Task HasUserMessage(string jsonMessage)
     {
         var message = JsonConvert.DeserializeObject<Message>(jsonMessage);
