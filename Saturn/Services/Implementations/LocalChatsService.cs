@@ -46,7 +46,8 @@ public class LocalChatsService
         if (chat != null)
         {
             chat.LastMessage = message;
-            return await Database.UpdateAsync(chat);
+            await Database.UpdateAsync(chat);
+            return chat.ChatId;
         }
         return 0;
     }

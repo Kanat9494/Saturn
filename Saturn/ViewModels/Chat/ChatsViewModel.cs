@@ -59,7 +59,9 @@ internal class ChatsViewModel : BaseViewModel
     {
         observableChat = Chats.FirstOrDefault(c => c.ChatId == chatId);
         int i = Chats.IndexOf(observableChat);
-        Chats[i].LastMessage = lastMessage;
+        if (i >= 0)
+            Chats[i].LastMessage = lastMessage;
+
         if (isOtherChat)
         {
             Chats[i].HasNotRead = true;
@@ -68,7 +70,12 @@ internal class ChatsViewModel : BaseViewModel
 
         Task.Run(async () =>
         {
-            await _chatsService.UpdateLastMessageAsync(chatId, lastMessage);
+            var id = await _chatsService.UpdateLastMessageAsync(chatId, lastMessage);
+
+            if (isOtherChat)
+            {
+
+            }
         });
     }
 
