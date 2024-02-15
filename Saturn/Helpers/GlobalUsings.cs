@@ -25,6 +25,8 @@ global using CommunityToolkit.Mvvm.ComponentModel;
 global using System.Net.WebSockets;
 global using Saturn.Helpers.WebSocket;
 global using Saturn.Enums;
+global using Saturn.Views;
+
 
 
 

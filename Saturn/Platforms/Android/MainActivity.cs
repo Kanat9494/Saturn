@@ -7,11 +7,23 @@ using Android.OS;
 namespace Saturn
 {
     [Activity(Theme = "@style/Maui.SplashTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize | ConfigChanges.Density)]
+    [IntentFilter(new[] {Android.Content.Intent.ActionView}, 
+        DataScheme = "https", 
+        DataHost = "letoinc.saturn.kg", 
+        DataPathPrefix = "/blog-post-details",
+        AutoVerify = true,
+        Categories = new[] { Android.Content.Intent.ActionView, Android.Content.Intent.CategoryDefault, Android.Content.Intent.CategoryBrowsable})]
     public class MainActivity : MauiAppCompatActivity
     {
         protected override void OnCreate(Bundle? savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+
+            var url = Intent?.DataString;
+            if (!string.IsNullOrWhiteSpace(url))
+            {
+                Microsoft.Maui.Controls.Application.Current.SendOnAppLinkRequestReceived(new Uri(url));
+            }
 
             //try
             //{
