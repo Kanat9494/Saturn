@@ -62,7 +62,7 @@ internal class ChatsViewModel : BaseViewModel
         if (i >= 0)
             Chats[i].LastMessage = lastMessage;
 
-        if (isOtherChat)
+        if (isOtherChat && i >= 0)
         {
             Chats[i].HasNotRead = true;
             Chats[i].NotReadCount++;
