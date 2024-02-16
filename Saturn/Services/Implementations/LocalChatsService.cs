@@ -70,14 +70,25 @@ public class LocalChatsService
         return await Database.DeleteAsync(chat);
     }
 
-    public async Task<int> HasUserChat(int userId)
+    public async Task<int> HasUserChat(int senderId, string message)
     {
         await Init();
-        var existingChat = await Database.Table<ChatRoom>().FirstOrDefaultAsync(c => c.SenderId == userId);
+        var existingChat = await Database.Table<ChatRoom>().FirstOrDefaultAsync(c => c.SenderId == senderId);
 
         if (existingChat != null)
             return existingChat.ChatId;
 
-        return 0;
+        var chat = new ChatRoom
+        {
+            Title = senderId.ToString(),
+            SenderId = senderId,
+            ReceiverId = AuthFields.UserId,
+            LastMessage = message,
+            HasNotRead = true,
+            NotReadCount = 1,
+        };
+        await SaveItemAsync(chat);
+
+        return chat.ChatId;
     }
 }

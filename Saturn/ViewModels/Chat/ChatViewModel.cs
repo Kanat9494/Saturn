@@ -105,7 +105,10 @@ internal class ChatViewModel : BaseViewModel, IQueryAttributable
 
         int chatId;
         if (message.ReceiverId == _userId)
-            chatId = await _chatsService.HasUserChat(message.SenderId);
+        {
+            chatId = await _chatsService.HasUserChat(message.SenderId, message.Content);
+
+        }
         else
             chatId = Chat.ChatId;
 

@@ -88,7 +88,7 @@ internal class ChatsViewModel : BaseViewModel
         try
         {
             var message = JsonConvert.DeserializeObject<Message>(json);
-            var chatId = await _chatsService.HasUserChat(message.SenderId);
+            var chatId = await _chatsService.HasUserChat(message.SenderId, message.Content);
 
             if (chatId > 0)
             {
