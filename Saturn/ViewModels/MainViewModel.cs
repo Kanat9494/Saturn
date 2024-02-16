@@ -7,6 +7,7 @@ internal class MainViewModel : BaseViewModel
         Products = new ObservableCollection<Product>();
         Blogs = new ObservableCollection<BlogPost>();
         IsBusy = true;
+        ShareCommand = new AsyncRelayCommand<int>(OnShareUri);
 
         Task.Run(async () =>
         {
@@ -22,6 +23,9 @@ internal class MainViewModel : BaseViewModel
         //RTServerManager.ConnectToRTCServer(1, 54);
 
     }
+
+    public ICommand ShareCommand { get; }
+
 
     private string _userId;
 
@@ -70,6 +74,16 @@ internal class MainViewModel : BaseViewModel
 
         IsBusy = false;
         IsContent = true;
+    }
+
+    private async Task OnShareUri(int blogId)
+    {
+        string uri = $"{ServerConstants.DEEPLINK_DATA_SCHEME}://{ServerConstants.DEEPLINK_DATA_HOST}/{ServerConstants.DEEPLINK_DATA_PATH_PREFIX}/{blogId}";
+        await Share.RequestAsync(new ShareTextRequest
+        {
+            Uri = uri,
+            Title = "Поделиться постом"
+        });
     }
 
     internal async void LaunchApp()

@@ -20,4 +20,8 @@ internal class ServerConstants
     //internal const string RTC_HOST = "192.168.1.51";
 
     internal const int RTC_PORT = 8888;
+
+    internal const string DEEPLINK_DATA_SCHEME = "https";
+    internal const string DEEPLINK_DATA_HOST = "letoinc.saturn.kg";
+    internal const string DEEPLINK_DATA_PATH_PREFIX = "blog-post-details";
 }

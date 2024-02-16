@@ -27,7 +27,7 @@
 		<ApplicationId>com.companyname.saturn</ApplicationId>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>1.0.57</ApplicationDisplayVersion>
+		<ApplicationDisplayVersion>1.0.58</ApplicationDisplayVersion>
 		<ApplicationVersion>1</ApplicationVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
@@ -81,6 +81,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Chat\ChatsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Common\BlogPostSkelet.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Common\ListViewSkelet.xaml">
