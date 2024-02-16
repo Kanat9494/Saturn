@@ -10,11 +10,15 @@ internal class ChatsViewModel : BaseViewModel
         NewChatRoomCommand = new AsyncRelayCommand(OnNewChatRoom);
 
         Chats = new ObservableCollection<ObservableChatRoom>();
-        ClientWSHelper.ChatLMChangedEvent += HandleChatLMChanged;
+        _clientWSManager = Application.Current.MainPage.Handler.MauiContext.Services.GetService<ClientWSManager>();
 
+        _clientWSManager.ChatLMChangedEvent += HandleChatLMChanged;
 
         Task.Run(InitializeChats);
     }
+
+    private ClientWSManager _clientWSManager;
+
 
     private readonly LocalChatsService _chatsService;
     private readonly LocalMessagesService _messagesService;
@@ -167,14 +171,14 @@ internal class ChatsViewModel : BaseViewModel
     internal void OnAppearing()
     {
         //RTMessageHelper.MessageReceivedEvent += HandleMessageReceived;
-        ClientWSHelper.MessageReceivedEvent += HandleMessageReceived;
+        _clientWSManager.MessageReceivedEvent += HandleMessageReceived;
 
     }
 
     internal void OnDisappearing()
     {
         //RTMessageHelper.MessageReceivedEvent -= HandleMessageReceived;
-        ClientWSHelper.MessageReceivedEvent -= HandleMessageReceived;
+        _clientWSManager.MessageReceivedEvent -= HandleMessageReceived;
 
     }
     #endregion
