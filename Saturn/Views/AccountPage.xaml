@@ -36,7 +36,7 @@
 
 
 
-                <Button Clicked="OnStartServiceClicked" Text="Start" VerticalOptions="Center" Margin="10, 0, 10, 0"/>
+                <Button Clicked="OnStartServiceClicked" Text="Start" VerticalOptions="Center" Margin="10, 0, 10, 10"/>
             </VerticalStackLayout>
         </VerticalStackLayout>
 
