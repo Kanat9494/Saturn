@@ -90,7 +90,7 @@ internal class ChatsViewModel : BaseViewModel
             {
                 await CreateLocalMessage(chatId, message);
                 chat = await _chatsService.GetItemAsync(chatId);
-                chat.Title = $"Aika + {message.SenderId}";
+                chat.Title = $"{message.SenderId}";
                 _title = chat.Title;
                 chat.SenderId = message.SenderId;
                 chat.LastMessage = message.Content;
@@ -116,7 +116,7 @@ internal class ChatsViewModel : BaseViewModel
             {
                 chat = new ChatRoom
                 {
-                    Title = $"Aika {message.SenderId}",
+                    Title = $"{message.SenderId}",
                     SenderId = message.SenderId,
                     LastMessage = message.Content,
                     NotReadCount = 1,
@@ -188,7 +188,7 @@ internal class ChatsViewModel : BaseViewModel
 
         chat = new ChatRoom
         {
-            Title = $"Aika {result}",
+            Title = $"{result}",
             SenderId = int.Parse(result),
             ReceiverId = AuthFields.UserId,
             LastMessage = "",
