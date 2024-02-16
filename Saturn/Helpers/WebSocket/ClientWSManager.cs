@@ -6,20 +6,20 @@ public class ClientWSManager
 {
     public ClientWSManager()
     {
-
+        _clientWS = new ClientWebSocket();
     }
 
     private ulong _userId;
     private ulong _receiverId;
-    private static ClientWebSocket _clientWS;
-    static string _uri = ServerConstants.WS_SERVER + $"api/Chats/ConnectTOWS?userId=";
+    private ClientWebSocket _clientWS;
+    string _uri = ServerConstants.WS_SERVER + $"api/Chats/ConnectTOWS?userId=";
 
     protected internal void ConnectToWSServer(ulong userId)
     {
         try
         {
             _userId = userId;
-            _clientWS = new ClientWebSocket();
+            
 
 
             Task.Run(async () =>
@@ -65,7 +65,7 @@ public class ClientWSManager
         }
     }
 
-    internal static async Task SendMessageAsync(string jsonMessage)
+    internal async Task SendMessageAsync(string jsonMessage)
     {
         try
         {

@@ -78,13 +78,12 @@ internal class ChatViewModel : BaseViewModel, IQueryAttributable
         };
         var jsonMessage = JsonConvert.SerializeObject(message);
         //await RTServerManager.SendMessageAsync(jsonMessage);
-        await ClientWSManager.SendMessageAsync(jsonMessage);
+        //await ClientWSManager.SendMessageAsync(jsonMessage);
         await _messagesService.SaveItemAsync(message);
         Messages.Add(message);
 
         MessageText = string.Empty;
 
-        //RTMessageHelper.NotifyChatLMChangedEvent(message.ReceiverId, message.Content, message.SenderId == Chat.SenderId);
         ClientWSHelper.NotifyWSChatLMChangedEvent(Chat.ChatId, message.Content, message.SenderId == Chat.SenderId, message.ReceiverId, _userId);
     }
 
