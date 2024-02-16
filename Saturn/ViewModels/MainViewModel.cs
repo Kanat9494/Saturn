@@ -8,7 +8,15 @@ internal class MainViewModel : BaseViewModel
         Blogs = new ObservableCollection<BlogPost>();
         IsBusy = true;
         ShareCommand = new AsyncRelayCommand<int>(OnShareUri);
+        try
+        {
+            _clientWSManager = Application.Current.MainPage.Handler.MauiContext.Services.GetService<ClientWSManager>();
 
+        }
+        catch (Exception ex)
+        {
+
+        }
         Task.Run(async () =>
         {
             _userId = await SecureStorage.Default.GetAsync("userId");
@@ -16,7 +24,7 @@ internal class MainViewModel : BaseViewModel
         }).GetAwaiter().OnCompleted(() =>
         {
             IsBusy = false;
-            ClientWSManager.ConnectToWSServer(ulong.Parse(_userId ?? "0"));
+            _clientWSManager?.ConnectToWSServer(ulong.Parse(_userId ?? "0"));
             AuthFields.UserId = int.Parse(_userId ?? "0");
         });
 
@@ -25,6 +33,8 @@ internal class MainViewModel : BaseViewModel
     }
 
     public ICommand ShareCommand { get; }
+
+    private ClientWSManager _clientWSManager;
 
 
     private string _userId;

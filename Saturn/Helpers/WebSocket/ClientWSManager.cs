@@ -2,9 +2,9 @@
 
 namespace Saturn.Helpers.WebSocket;
 
-internal class ClientWSManager
+public class ClientWSManager
 {
-    internal ClientWSManager()
+    public ClientWSManager()
     {
 
     }
@@ -14,7 +14,7 @@ internal class ClientWSManager
     private static ClientWebSocket _clientWS;
     static string _uri = ServerConstants.WS_SERVER + $"api/Chats/ConnectTOWS?userId=";
 
-    internal static void ConnectToWSServer(ulong userId)
+    protected internal void ConnectToWSServer(ulong userId)
     {
         try
         {
