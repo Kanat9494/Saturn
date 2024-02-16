@@ -19,8 +19,6 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>
                 <RowDefinition Height="50"/>
-                <!--<RowDefinition Height="50"/>
-                <RowDefinition Height="50"/>-->
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
@@ -36,13 +34,10 @@
 
             </Grid>
 
-            
-
             <StackLayout Grid.Row="2" IsVisible="{Binding IsBusy}">
                 <common:BlogPostSkelet/>
                 <common:BlogPostSkelet/>
             </StackLayout>
-    
     
             <!--Content-->
             <Grid Grid.Row="0" VerticalOptions="Center" Margin="10, 0, 10, 0" IsVisible="{Binding IsContent}">
