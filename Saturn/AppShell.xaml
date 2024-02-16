@@ -44,4 +44,10 @@
             Icon="account_icon.png"/>
     </TabBar>
 
+    <!--<ShellContent
+        Shell.NavBarIsVisible="False"
+        Shell.TabBarIsVisible="False"
+        ContentTemplate="{DataTemplate views:DetailsPage}"
+        Route="DetailsPage"/>-->
+
 </Shell>
