@@ -13,10 +13,13 @@ internal class ChatViewModel : BaseViewModel, IQueryAttributable
         SendCommand = new AsyncRelayCommand(OnSend);
 
         _userId = AuthFields.UserId;
+
+        _clientWSManager = Application.Current.MainPage.Handler.MauiContext.Services.GetService<ClientWSManager>();
     }
 
     private readonly LocalMessagesService _messagesService;
     private readonly LocalChatsService _chatsService;
+    private ClientWSManager _clientWSManager;
     public ObservableCollection<Message> Messages { get; set; }
 
     private int _userId;
@@ -78,7 +81,7 @@ internal class ChatViewModel : BaseViewModel, IQueryAttributable
         };
         var jsonMessage = JsonConvert.SerializeObject(message);
         //await RTServerManager.SendMessageAsync(jsonMessage);
-        //await ClientWSManager.SendMessageAsync(jsonMessage);
+        await _clientWSManager.SendMessageAsync(jsonMessage);
         await _messagesService.SaveItemAsync(message);
         Messages.Add(message);
 
