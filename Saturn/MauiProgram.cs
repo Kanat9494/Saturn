@@ -23,6 +23,8 @@ namespace Saturn
             builder.Services.AddTransient<ChatsPage>();
             builder.Services.AddTransient<ChatPage>();
             builder.Services.AddSingleton<ClientWSManager>();
+            builder.Services.AddSingleton<MainPage>();
+            builder.Services.AddSingleton<MainViewModel>();
 
 
 

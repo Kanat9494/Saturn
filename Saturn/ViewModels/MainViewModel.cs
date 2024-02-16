@@ -1,8 +1,8 @@
 ﻿namespace Saturn.ViewModels;
 
-internal class MainViewModel : BaseViewModel
+public class MainViewModel : BaseViewModel
 {
-    public MainViewModel()
+    public MainViewModel(IServiceProvider serviceProvider)
     {
         Products = new ObservableCollection<Product>();
         Blogs = new ObservableCollection<BlogPost>();
@@ -10,7 +10,7 @@ internal class MainViewModel : BaseViewModel
         ShareCommand = new AsyncRelayCommand<int>(OnShareUri);
         try
         {
-            _clientWSManager = Application.Current.MainPage.Handler.MauiContext.Services.GetService<ClientWSManager>();
+            _clientWSManager = serviceProvider.GetService<ClientWSManager>();
 
         }
         catch (Exception ex)

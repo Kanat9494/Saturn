@@ -1,6 +1,6 @@
 ﻿namespace Saturn.ViewModels;
 
-internal class BaseViewModel : INotifyPropertyChanged
+public class BaseViewModel : INotifyPropertyChanged
 {
     private bool _isBusy;
     public bool IsBusy

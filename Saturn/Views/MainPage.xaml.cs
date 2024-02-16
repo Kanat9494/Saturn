@@ -2,13 +2,13 @@ namespace Saturn.Views;
 
 public partial class MainPage : ContentPage
 {
-	public MainPage()
+	public MainPage(MainViewModel mainViewModel)
 	{
 		InitializeComponent();
 
         //GenerateUIAsync();
 
-        this.BindingContext = _viewModel = new MainViewModel();
+        this.BindingContext = _viewModel = mainViewModel;
         //AddCollectionView();
 
 
