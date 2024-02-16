@@ -9,8 +9,8 @@ public class ClientWSManager
 
     }
 
-    private static ulong _userId;
-    private static ulong _receiverId;
+    private ulong _userId;
+    private ulong _receiverId;
     private static ClientWebSocket _clientWS;
     static string _uri = ServerConstants.WS_SERVER + $"api/Chats/ConnectTOWS?userId=";
 
@@ -33,7 +33,7 @@ public class ClientWSManager
         }
     }
 
-    internal static async Task ReceiveMessage()
+    internal async Task ReceiveMessage()
     {
         try
         {
