@@ -8,8 +8,8 @@ public partial class ChatPage : ContentPage
 
 		BindingContext = _viewModel = new ChatViewModel(messagesService, chatsService);
 
-		//contentCV.ScrollTo(_viewModel.Messages.Last());
-	}
+        //contentCV.ScrollTo(_viewModel.Messages.Last());
+    }
 
 	ChatViewModel _viewModel;
 
@@ -26,4 +26,13 @@ public partial class ChatPage : ContentPage
 
 		_viewModel.OnDisappearing();
 	}
+
+	void ClearNavigationStack()
+	{
+        var stack = Shell.Current.Navigation.NavigationStack.ToArray();
+        for (int i = stack.Length - 1; i > 0; i--)
+        {
+            Shell.Current.Navigation.RemovePage(stack[i]);
+        }
+    }
 }

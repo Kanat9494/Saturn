@@ -38,7 +38,7 @@ namespace Saturn
                 {
                     if (blogId > 0)
                     {
-                        Shell.Current.GoToAsync("DetailsPage");
+                        Shell.Current.GoToAsync("DetailsPageFromDeeplink");
                     }
                     else
                     {
