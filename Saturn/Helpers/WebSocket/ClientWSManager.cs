@@ -4,6 +4,11 @@ namespace Saturn.Helpers.WebSocket;
 
 internal class ClientWSManager
 {
+    internal ClientWSManager()
+    {
+
+    }
+
     private static ulong _userId;
     private static ulong _receiverId;
     private static ClientWebSocket _clientWS;
