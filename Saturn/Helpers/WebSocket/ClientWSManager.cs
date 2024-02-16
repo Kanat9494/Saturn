@@ -8,7 +8,6 @@ public class ClientWSManager
     public ClientWSManager()
     {
         _clientWS = new ClientWebSocket();
-        _clientWSHelper = new ClientWSHelper();
     }
 
     internal event WSMessageReceivedEventHandler? MessageReceivedEvent;
@@ -18,7 +17,6 @@ public class ClientWSManager
     private ulong _receiverId;
     private ClientWebSocket _clientWS;
     string _uri = ServerConstants.WS_SERVER + $"api/Chats/ConnectTOWS?userId=";
-    private ClientWSHelper _clientWSHelper;
 
     protected internal void ConnectToWSServer(ulong userId)
     {
