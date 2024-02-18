@@ -36,15 +36,14 @@ namespace Saturn
                 bool isActionParamasValid = long.TryParse(uri.Segments.ElementAt(2), out long blogId);
                 if (action.ToLower() == "blog-post-details" && isActionParamasValid)
                 {
-                    //if (blogId > 0)
-                    //{
-                    //    Shell.Current.GoToAsync("DetailsPageFromDeeplink");
-                    //}
-                    //else
-                    //{
-                    //    Shell.Current.GoToAsync("MainPage");
-                    //}
-                    Shell.Current.GoToAsync("DetailsPageFromDeeplink");
+                    if (blogId > 0)
+                    {
+                        Shell.Current.GoToAsync("DetailsPageFromDeeplink");
+                    }
+                    else
+                    {
+                        Shell.Current.GoToAsync("MainPage");
+                    }
                 }
             }
         }
