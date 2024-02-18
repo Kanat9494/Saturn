@@ -19,12 +19,12 @@ namespace Saturn
         {
             base.OnCreate(savedInstanceState);
 
-            var url = Intent?.DataString;
-            if (!string.IsNullOrWhiteSpace(url))
-            {
-                HandleAppLink(url);
+            //var url = Intent?.DataString;
+            //if (!string.IsNullOrWhiteSpace(url))
+            //{
+            //    HandleAppLink(url);
 
-            }
+            //}
             
 
             //try
@@ -39,6 +39,20 @@ namespace Saturn
             //{
             //    System.Diagnostics.Debug.WriteLine(ex.Message);
             //}
+        }
+
+        protected override void OnNewIntent(Intent? intent)
+        {
+            base.OnNewIntent(intent);
+
+            if (intent?.Action == Intent.ActionView)
+            {
+                var data = intent?.Data?.ToString();
+                if (!string.IsNullOrWhiteSpace(data))
+                {
+                    HandleAppLink(data);
+                }
+            }
         }
 
         static void HandleAppLink(string url)
