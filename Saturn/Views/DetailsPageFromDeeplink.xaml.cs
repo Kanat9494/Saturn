@@ -9,11 +9,11 @@ public partial class DetailsPageFromDeeplink : ContentPage
 
     }
 
-    protected override bool OnBackButtonPressed()
-    {
-        System.Diagnostics.Process.GetCurrentProcess().Kill();
-        return false;
-    }
+    //protected override bool OnBackButtonPressed()
+    //{
+    //    System.Diagnostics.Process.GetCurrentProcess().Kill();
+    //    return false;
+    //}
 
     void ClearNavigationStack()
 	{
