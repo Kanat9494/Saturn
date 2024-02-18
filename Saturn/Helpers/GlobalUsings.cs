@@ -25,7 +25,6 @@ global using System.Net.WebSockets;
 global using Saturn.Helpers.WebSocket;
 global using Saturn.Enums;
 global using Saturn.Views;
-global using Microsoft.Maui.LifecycleEvents;
 
 
 

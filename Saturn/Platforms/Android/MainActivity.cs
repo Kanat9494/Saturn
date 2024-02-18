@@ -19,14 +19,6 @@ namespace Saturn
         {
             base.OnCreate(savedInstanceState);
 
-            //var url = Intent?.DataString;
-            //if (!string.IsNullOrWhiteSpace(url))
-            //{
-            //    HandleAppLink(url);
-
-            //}
-            
-
             //try
             //{
             //    var jobScheduler = GetSystemService(Android.Content.Context.JobSchedulerService) as JobScheduler;
