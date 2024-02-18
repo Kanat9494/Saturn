@@ -16,7 +16,6 @@ global using Saturn.ViewModels.Chat;
 global using Saturn.Views.Chat;
 global using System.Net.Sockets;
 global using System.Text;
-global using System.Diagnostics;
 global using Newtonsoft.Json;
 global using System.Windows.Input;
 global using CommunityToolkit.Mvvm.Input;
@@ -26,6 +25,8 @@ global using System.Net.WebSockets;
 global using Saturn.Helpers.WebSocket;
 global using Saturn.Enums;
 global using Saturn.Views;
+global using Microsoft.Maui.LifecycleEvents;
+
 
 
 

@@ -15,6 +15,24 @@ namespace Saturn
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                })
+                .ConfigureLifecycleEvents(lifecycle =>
+                {
+#if ANDROID
+                    lifecycle.AddAndroid(android => {
+						android.OnCreate((activity, bundle) =>
+						{
+							var action = activity.Intent?.Action;
+							var data = activity.Intent?.Data?.ToString();
+
+							if (action == Android.Content.Intent.ActionView && data is not null)
+							{
+								activity.Finish();
+								System.Threading.Tasks.Task.Run(() => HandleAppLink(data));
+							}
+						});
+					});
+#endif
                 });
                 
 
@@ -33,6 +51,14 @@ namespace Saturn
 #endif
 
             return builder.Build();
+        }
+
+        static void HandleAppLink(string url)
+        {
+            if (Uri.TryCreate(url, UriKind.RelativeOrAbsolute, out var uri))
+            {
+                App.Current?.SendOnAppLinkRequestReceived(uri);
+            }
         }
     }
 }
