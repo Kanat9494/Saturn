@@ -20,8 +20,6 @@ namespace Saturn
             base.OnCreate(savedInstanceState);
 
             var url = Intent?.DataString;
-            Intent? intent = this.Intent;
-            var action = intent?.Action;
             if (!string.IsNullOrWhiteSpace(url))
             {
                 Microsoft.Maui.Controls.Application.Current.SendOnAppLinkRequestReceived(new Uri(url));
