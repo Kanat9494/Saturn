@@ -22,7 +22,7 @@ namespace Saturn
             var url = Intent?.DataString;
             if (!string.IsNullOrWhiteSpace(url))
             {
-                Microsoft.Maui.Controls.Application.Current.SendOnAppLinkRequestReceived(new Uri(url));
+                HandleAppLink(url);
 
             }
             
@@ -39,6 +39,14 @@ namespace Saturn
             //{
             //    System.Diagnostics.Debug.WriteLine(ex.Message);
             //}
+        }
+
+        static void HandleAppLink(string url)
+        {
+            if (Uri.TryCreate(url, UriKind.RelativeOrAbsolute, out var uri))
+            {
+                App.Current?.SendOnAppLinkRequestReceived(uri);
+            }
         }
     }
 }
