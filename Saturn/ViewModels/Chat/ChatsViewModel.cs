@@ -23,11 +23,6 @@ public class ChatsViewModel : BaseViewModel
     private readonly LocalChatsService _chatsService;
     private readonly LocalMessagesService _messagesService;
 
-    private int _userId;
-    private int _receiverId;
-    private TcpClient? _tcpClient;
-    private NetworkStream? _stream;
-
     private string _title;
 
     public ICommand ChatCommand { get; }
