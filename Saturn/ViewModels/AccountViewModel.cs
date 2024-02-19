@@ -6,18 +6,6 @@ internal class AccountViewModel : BaseViewModel
     {
         Task.Run(InitializeUserAsync);
         SignOutCommand = new AsyncRelayCommand(OnSignOut);
-        Products = new ObservableCollection<Product2>
-        {
-            new Product2
-            {
-                Title = "Title "
-            },
-            new Product2
-            {
-                Title = "Title 2"
-            },
-            
-        };
     }
 
     public ICommand SignOutCommand { get; }
@@ -28,8 +16,6 @@ internal class AccountViewModel : BaseViewModel
         get => _currentUser;
         set => SetProperty(ref _currentUser, value);
     }
-    public ObservableCollection<Product2> Products { get; set; }
-    
 
     private async Task OnSignOut()
     {
