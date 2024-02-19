@@ -27,10 +27,7 @@ public class ClientWSManager
             
 
 
-            Task.Run(async () =>
-            {
-                await ReceiveMessage();
-            });
+            Task.Run(ReceiveMessage);
         }
         catch (Exception ex)
         {
