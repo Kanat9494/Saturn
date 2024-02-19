@@ -61,16 +61,40 @@
                 </Grid>
                 
                 <CarouselView x:Name="tabsCarouselView" PositionChanged="OnPositionChanged" Grid.Row="1" 
-                    Loop="False">
-                    <CarouselView.ItemsSource>
-                        <x:Array Type="{x:Type x:String}">
-                            <x:String>Ваши посты</x:String>
-                            <x:String>Ваши объявления</x:String>
-                        </x:Array>
-                    </CarouselView.ItemsSource>
+                    Loop="False" ItemsSource="{Binding Tabs}">
                     <CarouselView.ItemTemplate>
-                        <DataTemplate>
-                            <Label Text="{Binding .}"/>
+                        <DataTemplate x:DataType="models:CustomTab">
+                            <CollectionView ItemsSource="{Binding TabItems}">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="models:BlogPost">
+                                        <Grid Background="White" Margin="0, 0, 0, 10">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="40"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="1"/>
+                                                <RowDefinition Height="50"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Label Grid.Row="0" Text="{Binding Title}" Margin="10, 10, 10, 0" FontSize="19" FontAttributes="Bold" FontFamily="OpenSansSemibold"/>
+                                            <Label Grid.Row="1" Text="{Binding Content}" Margin="10, 10, 10, 10" MaxLines="9"/>
+                                            <BoxView BackgroundColor="#e6e6e6" Grid.Row="2"/>
+                                            <Grid Grid.Row="3">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="20*"/>
+                                                    <ColumnDefinition Width="60*"/>
+                                                    <ColumnDefinition Width="20*"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <Image Source="heart.png" VerticalOptions="Center" HeightRequest="25" WidthRequest="25"/>
+                                                <Label Text="Комментарии" VerticalOptions="Center" Grid.Column="1" HorizontalOptions="Center" FontFamily="OpenSansSemibold"/>
+                                                <Image Grid.Column="2" Source="send_icon.png" VerticalOptions="Center" WidthRequest="25" HeightRequest="25">
+                                                    
+                                                </Image>
+                                            </Grid>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
                         </DataTemplate>
                     </CarouselView.ItemTemplate>
                 </CarouselView>
