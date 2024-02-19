@@ -25,6 +25,7 @@ namespace Saturn
             builder.Services.AddSingleton<ClientWSManager>();
             builder.Services.AddSingleton<MainPage>();
             builder.Services.AddSingleton<MainViewModel>();
+            builder.Services.AddSingleton<ChatsViewModel>();
 
 
 

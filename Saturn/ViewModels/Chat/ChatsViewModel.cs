@@ -1,16 +1,16 @@
 ﻿namespace Saturn.ViewModels.Chat;
 
-internal class ChatsViewModel : BaseViewModel
+public class ChatsViewModel : BaseViewModel
 {
-    public ChatsViewModel(LocalChatsService chatsService, LocalMessagesService messagesService)
+    public ChatsViewModel(IServiceProvider serviceProvider)
     {
-        _chatsService = chatsService;
-        _messagesService = messagesService;
+        _chatsService = serviceProvider.GetService<LocalChatsService>();
+        _messagesService = serviceProvider.GetService<LocalMessagesService>();
         ChatCommand = new AsyncRelayCommand<ObservableChatRoom>(OnChat);
         NewChatRoomCommand = new AsyncRelayCommand(OnNewChatRoom);
 
         Chats = new ObservableCollection<ObservableChatRoom>();
-        _clientWSManager = Application.Current.MainPage.Handler.MauiContext.Services.GetService<ClientWSManager>();
+        _clientWSManager = serviceProvider.GetService<ClientWSManager>();
 
         _clientWSManager.ChatLMChangedEvent += HandleChatLMChanged;
 

@@ -2,11 +2,11 @@ namespace Saturn.Views.Chat;
 
 public partial class ChatsPage : ContentPage
 {
-	public ChatsPage(LocalChatsService chatsService, LocalMessagesService messagesService)
+	public ChatsPage(ChatsViewModel viewModel)
 	{
 		InitializeComponent();
 
-		BindingContext = _viewModel = new ChatsViewModel(chatsService, messagesService);
+		BindingContext = _viewModel = viewModel;
 	}
 
 	ChatsViewModel _viewModel;
