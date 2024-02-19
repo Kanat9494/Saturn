@@ -21,10 +21,18 @@ public class MainViewModel : BaseViewModel
         {
             _userId = await SecureStorage.Default.GetAsync("userId");
             await InitializeBlogs();
-        }).GetAwaiter().OnCompleted(() =>
+        }).GetAwaiter().OnCompleted(async () =>
         {
             IsBusy = false;
-            _clientWSManager?.ConnectToWSServer(ulong.Parse(_userId ?? "0"));
+            if (_clientWSManager._isConnected)
+            {
+                await _clientWSManager.DisconnectAsync();
+                _clientWSManager?.ConnectToWSServer(ulong.Parse(_userId ?? "0"));
+            }
+            else
+            {
+                _clientWSManager?.ConnectToWSServer(ulong.Parse(_userId ?? "0"));
+            }
             AuthFields.UserId = int.Parse(_userId ?? "0");
         });
 

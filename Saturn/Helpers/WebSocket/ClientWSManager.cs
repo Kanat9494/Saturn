@@ -17,6 +17,7 @@ public class ClientWSManager
     private ulong _receiverId;
     private ClientWebSocket _clientWS;
     string _uri = ServerConstants.WS_SERVER + $"api/Chats/ConnectTOWS?userId=";
+    protected internal bool _isConnected = false;
 
     protected internal void ConnectToWSServer(ulong userId)
     {
@@ -47,6 +48,7 @@ public class ClientWSManager
             StringBuilder messageBuilder = new StringBuilder();
             while (true)
             {
+                _isConnected = true;
                 var receiveResult = await _clientWS.ReceiveAsync(new ArraySegment<byte>(data), CancellationToken.None);
                 messageBuilder.Append(Encoding.UTF8.GetString(data, 0, receiveResult.Count));
                 NotifyWSMessageReceivedEvent(messageBuilder.ToString());
@@ -78,6 +80,22 @@ public class ClientWSManager
         }
         catch (Exception ex)
         {
+
+        }
+    }
+
+    internal async Task DisconnectAsync()
+    {
+        try
+        {
+            if (_clientWS.State == WebSocketState.Open || _clientWS.State == WebSocketState.CloseSent)
+            {
+                await _clientWS.CloseAsync(WebSocketCloseStatus.NormalClosure, "Connection closed by client", CancellationToken.None);
+                _isConnected = false;
+            }
+        }
+        catch (Exception ex) 
+        { 
 
         }
     }
