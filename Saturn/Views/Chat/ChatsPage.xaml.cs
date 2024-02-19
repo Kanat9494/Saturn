@@ -24,4 +24,5 @@ public partial class ChatsPage : ContentPage
 
 		_viewModel.OnDisappearing();
 	}
+	
 }

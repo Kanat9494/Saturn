@@ -31,7 +31,7 @@
             </Image>
         </Grid>
 
-        <CollectionView ItemsSource="{Binding Chats, Mode=OneTime}" Grid.Row="1" Margin="0, 5, 0, 0">
+        <CollectionView ItemsSource="{Binding Chats, Mode=OneTime}" Grid.Row="1" Margin="0, 5, 0, 0" x:Name="chatsCV">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:ObservableChatRoom">
                     <Grid Margin="5, 5, 5, 0">

@@ -8,10 +8,12 @@ public partial class ChatPage : ContentPage
 
 		BindingContext = _viewModel = new ChatViewModel(messagesService, chatsService);
 
-        //contentCV.ScrollTo(_viewModel.Messages.Last());
-    }
+		contentCV.ScrollTo(_viewModel.Messages.Last(), animate: false);
+		//chatsCV.ScrollTo(_viewModel.Chats, position: ScrollToPosition.End, animate: false);
 
-	ChatViewModel _viewModel;
+	}
+
+    ChatViewModel _viewModel;
 
     protected override void OnAppearing()
     {
