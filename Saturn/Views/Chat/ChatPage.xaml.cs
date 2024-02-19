@@ -8,9 +8,8 @@ public partial class ChatPage : ContentPage
 
 		BindingContext = _viewModel = new ChatViewModel(messagesService, chatsService);
 
-		//contentCV.ScrollTo(_viewModel.Messages.Last(), animate: false);
-		var message = _viewModel.Messages.Last();
-		Debug.WriteLine(_viewModel.Messages.Count);
+		contentCV.ScrollTo(_viewModel.Messages, position: ScrollToPosition.End, animate: false);
+		//var message = _viewModel.Messages.Last();
 		//chatsCV.ScrollTo(_viewModel.Chats, position: ScrollToPosition.End, animate: false);
 
 	}
