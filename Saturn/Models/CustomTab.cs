@@ -2,5 +2,5 @@
 
 public class CustomTab
 {
-    public List<BlogPost> TabItems { get; set; }
+    public ObservableCollection<BlogPost> TabItems { get; set; }
 }
