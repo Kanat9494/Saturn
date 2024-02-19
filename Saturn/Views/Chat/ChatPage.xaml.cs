@@ -7,8 +7,6 @@ public partial class ChatPage : ContentPage
 		InitializeComponent();
 
 		BindingContext = _viewModel = new ChatViewModel(messagesService, chatsService);
-
-		contentCV.ScrollTo(_viewModel.Messages, position: ScrollToPosition.End, animate: false);
 	}
 
     ChatViewModel _viewModel;
