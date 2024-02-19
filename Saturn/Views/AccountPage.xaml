@@ -11,7 +11,11 @@
             <VerticalStackLayout HeightRequest="170" Background="White">
                 <Border HeightRequest="100" WidthRequest="100" Stroke="Transparent" StrokeShape="RoundRectangle 50"
                     Margin="0, 20, 0, 0">
-                    <Image Source="{Binding CurrentUser.ProfileImageSource}" Aspect="AspectFill"/>
+                    <Image Aspect="AspectFill">
+                        <Image.Source>
+                            <UriImageSource Uri="{Binding CurrentUser.ProfileImageSource}"/>
+                        </Image.Source>
+                    </Image>
                 </Border>
 
                 <Label Text="{Binding CurrentUser.UserName}" HorizontalOptions="Center" Margin="0, 20, 0, 0"
