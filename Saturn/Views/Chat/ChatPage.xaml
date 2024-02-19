@@ -31,7 +31,7 @@
                     <borderlessEntry:BorderlessEntry Placeholder="Введите сообщение" VerticalOptions="Center" Text="{Binding MessageText}"
                         Margin="10, 0, 0, 5"/>
                 </Border>
-                <Image Source="send_icon" Grid.Column="1" WidthRequest="25" HorizontalOptions="Center">
+                <Image Source="send_icon.png" Grid.Column="1" WidthRequest="25" HorizontalOptions="Center">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:ChatViewModel}}, Path=SendCommand}"/>
                     </Image.GestureRecognizers>
