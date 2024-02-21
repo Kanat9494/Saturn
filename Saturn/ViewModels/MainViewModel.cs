@@ -8,6 +8,7 @@ public class MainViewModel : BaseViewModel
         Blogs = new ObservableCollection<BlogPost>();
         IsBusy = true;
         ShareCommand = new AsyncRelayCommand<int>(OnShareUri);
+        RefreshPageCommand = new AsyncRelayCommand(InitializeBlogs);
         try
         {
             _clientWSManager = serviceProvider.GetService<ClientWSManager>();
@@ -41,6 +42,7 @@ public class MainViewModel : BaseViewModel
     }
 
     public ICommand ShareCommand { get; }
+    public ICommand RefreshPageCommand { get; }
 
     private ClientWSManager _clientWSManager;
 
@@ -57,6 +59,12 @@ public class MainViewModel : BaseViewModel
     {
         get => _isContent;
         set => SetProperty(ref _isContent, value);
+    }
+    private bool _isRefreshing;
+    public bool IsRefreshing
+    {
+        get => _isRefreshing;
+        set => SetProperty(ref _isRefreshing, value);
     }
 
     internal async Task GenerateProducts()
@@ -79,6 +87,9 @@ public class MainViewModel : BaseViewModel
 
     internal async Task InitializeBlogs()
     {
+        Blogs.Clear();
+        //IsBusy = true;
+        //IsContent = false;
         await Task.Delay(3000);
         for (int i = 1; i <= 300; i++)
         {
@@ -92,6 +103,7 @@ public class MainViewModel : BaseViewModel
 
         IsBusy = false;
         IsContent = true;
+        IsRefreshing = false;
     }
 
     private async Task OnShareUri(int blogId)

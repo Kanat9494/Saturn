@@ -14,7 +14,7 @@
         <toolkit:StatusBarBehavior StatusBarColor="{x:StaticResource Green35}"/>
     </ContentPage.Behaviors>
 
-    <RefreshView>
+    <RefreshView IsRefreshing="{Binding IsRefreshiing}" Command="{Binding RefreshPageCommand}">
         <Grid x:Name="contentGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>

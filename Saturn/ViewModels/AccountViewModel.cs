@@ -12,6 +12,14 @@ internal class AccountViewModel : BaseViewModel
         SignOutCommand = new AsyncRelayCommand(OnSignOut);
         var firstTabItems = new ObservableCollection<BlogPost>();
         var secondTabItems = new ObservableCollection<BlogPost>();
+        RefreshPageCommand = new RelayCommand(() =>
+        {
+            Task.Run(async () =>
+            {
+                await InitializeUserAsync();
+                await InitializeUserBlogs();
+            });
+        });
         Tabs = new ObservableCollection<CustomTab>()
         {
             new CustomTab
@@ -26,12 +34,19 @@ internal class AccountViewModel : BaseViewModel
     }
 
     public ICommand SignOutCommand { get; }
+    public ICommand RefreshPageCommand { get; }
 
     private User _currentUser;
     public User CurrentUser
     {
         get => _currentUser;
         set => SetProperty(ref _currentUser, value);
+    }
+    private bool _isRefreshing;
+    public bool IsRefreshing
+    {
+        get => _isRefreshing;
+        set => SetProperty(ref _isRefreshing, value);
     }
     public ObservableCollection<CustomTab> Tabs { get; set; }
 
@@ -50,6 +65,8 @@ internal class AccountViewModel : BaseViewModel
             UserName = "Кудайбергенов Канат Кудайбергенович",
             ProfileImageSource = "https://picsum.photos/id/301/200/300"
         };
+
+        IsRefreshing = false;
     }
 
     async Task InitializeUserBlogs()
