@@ -57,7 +57,7 @@
                             HeightRequest="20" WidthRequest="20" Stroke="Transparent" StrokeShape="RoundRectangle 10" IsVisible="{Binding HasNotRead, Mode=OneWay}">
                             <Label Text="{Binding NotReadCount, Mode=OneWay}" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" TextColor="White"/>
                         </Border>
-                        <BoxView Grid.Row="2" Background="#e6e6e6" Grid.ColumnSpan="2"/>
+                        <BoxView Grid.Row="2" Background="#e6e6e6" Grid.ColumnSpan="2" Grid.Column="1"/>
 
                         <Grid.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:ChatsViewModel}}, Path=ChatCommand}" CommandParameter="{Binding .}"/>
