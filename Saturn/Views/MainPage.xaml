@@ -14,53 +14,53 @@
         <toolkit:StatusBarBehavior StatusBarColor="{x:StaticResource Green35}"/>
     </ContentPage.Behaviors>
 
-    <RefreshView IsRefreshing="{Binding IsRefreshiing}" Command="{Binding RefreshPageCommand}">
-        <Grid x:Name="contentGrid">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="60"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+    <Grid x:Name="contentGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-            <Grid IsVisible="{Binding IsBusy}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="80*"/>
-                    <ColumnDefinition Width="20*"/>
-                    
-                </Grid.ColumnDefinitions>
+        <Grid IsVisible="{Binding IsBusy}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80*"/>
+                <ColumnDefinition Width="20*"/>
 
-                <Border BackgroundColor="{x:StaticResource White78}" StrokeShape="RoundRectangle 10" Margin="10"/>
-                <Border BackgroundColor="{x:StaticResource White78}" StrokeShape="RoundRectangle 10" Margin="10" Grid.Column="1" WidthRequest="40" HeightRequest="40"/>
+            </Grid.ColumnDefinitions>
 
-            </Grid>
+            <Border BackgroundColor="{x:StaticResource White78}" StrokeShape="RoundRectangle 10" Margin="10"/>
+            <Border BackgroundColor="{x:StaticResource White78}" StrokeShape="RoundRectangle 10" Margin="10" Grid.Column="1" WidthRequest="40" HeightRequest="40"/>
 
-            <StackLayout Grid.Row="2" IsVisible="{Binding IsBusy}">
-                <common:BlogPostSkelet/>
-                <common:BlogPostSkelet/>
-            </StackLayout>
-    
-            <!--Content-->
-            <Grid Grid.Row="0" VerticalOptions="Center" Margin="10, 0, 10, 0" IsVisible="{Binding IsContent}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="80*"/>
-                    <ColumnDefinition Width="20*"/>
+        </Grid>
 
-                </Grid.ColumnDefinitions>
+        <StackLayout Grid.Row="2" IsVisible="{Binding IsBusy}">
+            <common:BlogPostSkelet/>
+            <common:BlogPostSkelet/>
+        </StackLayout>
 
-                <Label Text="Saturn" FontSize="24" FontAttributes="Bold, Italic" Grid.Column="0"/>
+        <!--Content-->
+        <Grid Grid.Row="0" VerticalOptions="Center" Margin="10, 0, 10, 0" IsVisible="{Binding IsContent}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80*"/>
+                <ColumnDefinition Width="20*"/>
 
-                <Image Source="bell_icon.png" Grid.Column="1" HeightRequest="30" WidthRequest="30" HorizontalOptions="End"/>
-            </Grid>
+            </Grid.ColumnDefinitions>
 
-            <Border Grid.Row="1" HeightRequest="50" BackgroundColor="{x:StaticResource White78}" Margin="10" Stroke="Transparent"
-                StrokeShape="RoundRectangle 10">
-                <borderlessEntry:BorderlessEntry Margin="10, 5, 0, 0" Placeholder="Поиск"/>
-            </Border>
+            <Label Text="Saturn" FontSize="24" FontAttributes="Bold, Italic" Grid.Column="0"/>
 
-            <!--<CollectionView ItemsSource="{Binding Products}" Grid.Row="2" ItemTemplate="{x:StaticResource productTemplate}">
-                
-            </CollectionView>-->
-            <CollectionView ItemsSource="{Binding Blogs}" Grid.Row="2" BackgroundColor="{x:StaticResource White78}" IsVisible="{Binding IsContent}">
+            <Image Source="bell_icon.png" Grid.Column="1" HeightRequest="30" WidthRequest="30" HorizontalOptions="End"/>
+        </Grid>
+
+        <Border Grid.Row="1" HeightRequest="50" BackgroundColor="{x:StaticResource White78}" Margin="10" Stroke="Transparent"
+        StrokeShape="RoundRectangle 10">
+            <borderlessEntry:BorderlessEntry Margin="10, 5, 0, 0" Placeholder="Поиск"/>
+        </Border>
+
+        <!--<CollectionView ItemsSource="{Binding Products}" Grid.Row="2" ItemTemplate="{x:StaticResource productTemplate}">
+        
+    </CollectionView>-->
+        <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding RefreshPageCommand}" Grid.Row="2">
+            <CollectionView ItemsSource="{Binding Blogs}" BackgroundColor="{x:StaticResource White78}" IsVisible="{Binding IsContent}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:BlogPost">
                         <Grid Background="White" Margin="0, 0, 0, 10">
@@ -86,7 +86,7 @@
                                 <Image Grid.Column="2" Source="send_icon.png" VerticalOptions="Center" WidthRequest="25" HeightRequest="25">
                                     <Image.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:MainViewModel}}, Path=ShareCommand}"
-                                            CommandParameter="{Binding BlogId}"/>
+                                    CommandParameter="{Binding BlogId}"/>
                                     </Image.GestureRecognizers>
                                 </Image>
                             </Grid>
@@ -94,6 +94,6 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-        </Grid>
-    </RefreshView>
+        </RefreshView>
+    </Grid>
 </ContentPage>

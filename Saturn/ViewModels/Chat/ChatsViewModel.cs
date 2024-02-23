@@ -59,12 +59,19 @@ public class ChatsViewModel : BaseViewModel
         observableChat = Chats.FirstOrDefault(c => c.ChatId == chatId);
         int i = Chats.IndexOf(observableChat);
         if (i >= 0)
-            Chats[i].LastMessage = lastMessage;
+        {
+            //Chats[i].LastMessage = lastMessage;
+            observableChat.LastMessage = lastMessage;
+            Chats[i] = observableChat;
+        }
 
         if (isOtherChat && i >= 0)
         {
-            Chats[i].HasNotRead = true;
-            Chats[i].NotReadCount++;
+            //Chats[i].HasNotRead = true;
+            //Chats[i].NotReadCount++;
+            observableChat.HasNotRead = true;
+            observableChat.NotReadCount++;
+            Chats[i] = observableChat;
         }
 
         Task.Run(async () =>
@@ -106,9 +113,13 @@ public class ChatsViewModel : BaseViewModel
                 {
                     observableChat = Chats.FirstOrDefault(c => c.ChatId == chatId);
                     int i = Chats.IndexOf(observableChat!);
-                    Chats[i].LastMessage = message.Content;
-                    Chats[i].HasNotRead = true;
-                    Chats[i].NotReadCount++;
+                    //Chats[i].LastMessage = message.Content;
+                    //Chats[i].HasNotRead = true;
+                    //Chats[i].NotReadCount++;
+                    observableChat!.LastMessage = message.Content;
+                    observableChat.HasNotRead = true;
+                    observableChat.NotReadCount++;
+                    Chats[i] = observableChat;
                 }
             }
             else
@@ -133,9 +144,13 @@ public class ChatsViewModel : BaseViewModel
                 {
                     observableChat = Chats.FirstOrDefault(c => c.ChatId == chat.ChatId);
                     int i = Chats.IndexOf(observableChat);
-                    Chats[i].LastMessage = message.Content;
-                    Chats[i].HasNotRead = true;
-                    Chats[i].NotReadCount++;
+                    //Chats[i].LastMessage = message.Content;
+                    //Chats[i].HasNotRead = true;
+                    //Chats[i].NotReadCount++;
+                    observableChat.LastMessage = message.Content;
+                    observableChat.HasNotRead = true;
+                    observableChat.NotReadCount++;
+                    Chats[i] = observableChat;
                 }
             }
         }
