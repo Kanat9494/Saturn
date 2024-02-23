@@ -11,6 +11,7 @@ public class ObservableChatRoom : ObservableObject
         NotReadCount = chat.NotReadCount;
         HasNotRead = chat.HasNotRead;
         ReceiverId = chat.ReceiverId;
+        ProfileImage = chat.ImageUrl;
     }
 
     public int ChatId { get; set; }
@@ -34,6 +35,6 @@ public class ObservableChatRoom : ObservableObject
         get => _hasNotRead;
         set => SetProperty(ref _hasNotRead, value);
     }
-    public string ProfileImage { get; set; } = "https://picsum.photos/id/237/200/300";
+    public string ProfileImage { get; set; }
     public int ReceiverId { get; set; }
 }

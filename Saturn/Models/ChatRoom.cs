@@ -10,4 +10,5 @@ public class ChatRoom
     public string? LastMessage { get; set; }
     public int NotReadCount { get; set; } = 0;
     public bool HasNotRead { get; set; } = false;
+    public string ImageUrl { get; set; }
 }

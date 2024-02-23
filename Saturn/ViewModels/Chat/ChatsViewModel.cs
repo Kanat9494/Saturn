@@ -42,7 +42,11 @@ public class ChatsViewModel : BaseViewModel
         if (chats != null)
         {
             for (int i = 0; i < chats.Count; i++)
+            {
+                chats[i].ImageUrl = "https://picsum.photos/id/237/200/300";
                 Chats.Add(new ObservableChatRoom(chats[i]));
+
+            }
         }
     }
 
