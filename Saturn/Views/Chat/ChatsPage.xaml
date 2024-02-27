@@ -36,22 +36,22 @@
                 <DataTemplate x:DataType="models:ObservableChatRoom">
                     <Grid Margin="5, 5, 5, 0">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="15*"/>
-                            <ColumnDefinition Width="80*"/>
+                            <ColumnDefinition Width="18*"/>
+                            <ColumnDefinition Width="72*"/>
                             <ColumnDefinition Width="10*"/>
 
                         </Grid.ColumnDefinitions>
 
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="27"/>
                             <RowDefinition Height="1"/>
 
                         </Grid.RowDefinitions>
-                        <Border Grid.Column="0" Grid.RowSpan="2" Margin="3" StrokeShape="RoundRectangle 25" Stroke="Transparent">
+                        <Border Grid.Column="0" Grid.RowSpan="2" Margin="3" StrokeShape="RoundRectangle 50" Stroke="Transparent">
                             <Image Source="{Binding ProfileImage, Mode=OneTime}" Aspect="AspectFill"/>
                         </Border>
-                        <Label Text="{Binding Title}" FontAttributes="Bold" Grid.Column="1"/>
+                        <Label Text="{Binding Title}" FontAttributes="Bold" Grid.Column="1" FontSize="17"/>
                         <Label Text="{Binding LastMessage, Mode=OneWay}" Grid.Column="1" Grid.Row="1" LineBreakMode="NoWrap"/>
                         <Border Background="{x:StaticResource Red50}" Grid.Column="2" Grid.RowSpan="2" VerticalOptions="Center"
                             HeightRequest="20" WidthRequest="20" Stroke="Transparent" StrokeShape="RoundRectangle 10" IsVisible="{Binding HasNotRead, Mode=OneWay}">
