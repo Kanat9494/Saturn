@@ -46,7 +46,7 @@ public class ChatsViewModel : BaseViewModel
         }
     }
 
-    private void HandleMessageReceived(object sender, string jsonMessage)
+    private void HandleMessageReceived(string jsonMessage)
     {
         Task.Run(async () =>
         {
@@ -54,7 +54,7 @@ public class ChatsViewModel : BaseViewModel
         });
     }
 
-    private void HandleChatLMChanged(object sender, int chatId, string lastMessage, bool isOtherChat, int senderId, int receiverId)
+    private void HandleChatLMChanged(int chatId, string lastMessage, bool isOtherChat, int senderId, int receiverId)
     {
         observableChat = Chats.FirstOrDefault(c => c.ChatId == chatId);
         int i = Chats.IndexOf(observableChat);

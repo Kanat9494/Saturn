@@ -90,7 +90,7 @@ internal class ChatViewModel : BaseViewModel, IQueryAttributable
         _clientWSManager.NotifyWSChatLMChangedEvent(Chat.ChatId, message.Content, message.SenderId == Chat.SenderId, message.ReceiverId, _userId);
     }
 
-    private void HandleMessageReceived(object sender, string jsonMessage)
+    private void HandleMessageReceived(string jsonMessage)
     {
         Task.Run(async () =>
         {
