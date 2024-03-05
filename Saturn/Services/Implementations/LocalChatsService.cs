@@ -85,7 +85,7 @@ public class LocalChatsService
             ReceiverId = AuthFields.UserId,
             LastMessage = message,
             HasNotRead = true,
-            NotReadCount = 1,
+            NotReadCount = 0,
         };
         await SaveItemAsync(chat);
 
